@@ -1,0 +1,207 @@
+name: Build & SonarCloud
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+    env:
+      SONAR_ORG: deem0n564
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Build Wrapper
+        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@v4
+
+      - name: Build Lab1
+        run: |
+          rm -rf Lab1/build
+          mkdir Lab1/build
+          cmake -S Lab1 -B Lab1/build 
+          build-wrapper-linux-x86-64 --out-dir Lab1/build_wrapper cmake --build lab1/build --config Release
+
+      - name: Build Lab2
+        run: |
+          rm -rf Lab2/build
+          mkdir Lab2/build
+          cmake -S Lab2 -B Lab2/build 
+          build-wrapper-linux-x86-64 --out-dir Lab2/build_wrapper cmake --build lab2/build --config Release
+
+      - name: Build Lab3
+        run: |
+          rm -rf Lab3/build
+          mkdir Lab3/build
+          cmake -S Lab3 -B Lab3/build 
+          build-wrapper-linux-x86-64 --out-dir Lab3/build_wrapper cmake --build lab3/build --config Release
+
+      - name: Build Lab4
+        run: |
+          rm -rf Lab4/build
+          mkdir Lab4/build
+          cmake -S Lab4 -B Lab4/build 
+          build-wrapper-linux-x86-64 --out-dir Lab4/build_wrapper cmake --build lab4/build --config Release
+          
+      - name: Build Lab5
+        run: |
+          rm -rf Lab5/build
+          mkdir Lab5/build
+          cmake -S Lab5 -B Lab5/build 
+          build-wrapper-linux-x86-64 --out-dir Lab5/build_wrapper cmake --build lab5/build --config Release
+
+      - name: Build Lab6
+        run: |
+          rm -rf Lab6/build
+          mkdir Lab6/build
+          cmake -S Lab6 -B Lab6/build 
+          build-wrapper-linux-x86-64 --out-dir Lab6/build_wrapper cmake --build lab6/build --config Release
+      
+      - name: Build Lab7
+        run: |
+          rm -rf Lab7/build
+          mkdir Lab7/build
+          cmake -S Lab7 -B Lab7/build 
+          build-wrapper-linux-x86-64 --out-dir Lab7/build_wrapper cmake --build lab7/build --config Release
+      
+      - name: Build Lab8
+        run: |
+          rm -rf Lab8/build
+          mkdir Lab8/build
+          cmake -S Lab8 -B Lab8/build 
+          build-wrapper-linux-x86-64 --out-dir Lab8/build_wrapper cmake --build lab8/build --config Release
+
+ - name: SonarCloud scan Lab1
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab1
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab1
+            -Dsonar.cfamily.compile-commands=Lab1/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab2
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab2
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab2
+            -Dsonar.cfamily.compile-commands=Lab2/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab3
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab3
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab3
+            -Dsonar.cfamily.compile-commands=Lab3/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab4
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab4
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab4
+            -Dsonar.cfamily.compile-commands=Lab4/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab5
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab5
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab5
+            -Dsonar.cfamily.compile-commands=Lab5/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab6
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab6
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab6
+            -Dsonar.cfamily.compile-commands=Lab6/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+      
+      - name: SonarCloud scan Lab7
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab7
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab7
+            -Dsonar.cfamily.compile-commands=Lab7/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+            
+      - name: SonarCloud scan Lab8
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab8
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab8
+            -Dsonar.cfamily.compile-commands=Lab8/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*

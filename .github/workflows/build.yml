@@ -27,56 +27,56 @@ jobs:
           rm -rf Lab1/build
           mkdir Lab1/build
           cmake -S Lab1 -B Lab1/build 
-          build-wrapper-linux-x86-64 --out-dir Lab1/build_wrapper cmake --build lab1/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab1/build_wrapper cmake --build Lab1/build --config Release
 
       - name: Build Lab2
         run: |
           rm -rf Lab2/build
           mkdir Lab2/build
           cmake -S Lab2 -B Lab2/build 
-          build-wrapper-linux-x86-64 --out-dir Lab2/build_wrapper cmake --build lab2/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab2/build_wrapper cmake --build Lab2/build --config Release
 
       - name: Build Lab3
         run: |
           rm -rf Lab3/build
           mkdir Lab3/build
           cmake -S Lab3 -B Lab3/build 
-          build-wrapper-linux-x86-64 --out-dir Lab3/build_wrapper cmake --build lab3/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab3/build_wrapper cmake --build Lab3/build --config Release
 
       - name: Build Lab4
         run: |
           rm -rf Lab4/build
           mkdir Lab4/build
           cmake -S Lab4 -B Lab4/build 
-          build-wrapper-linux-x86-64 --out-dir Lab4/build_wrapper cmake --build lab4/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab4/build_wrapper cmake --build Lab4/build --config Release
           
       - name: Build Lab5
         run: |
           rm -rf Lab5/build
           mkdir Lab5/build
           cmake -S Lab5 -B Lab5/build 
-          build-wrapper-linux-x86-64 --out-dir Lab5/build_wrapper cmake --build lab5/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab5/build_wrapper cmake --build Lab5/build --config Release
 
       - name: Build Lab6
         run: |
           rm -rf Lab6/build
           mkdir Lab6/build
           cmake -S Lab6 -B Lab6/build 
-          build-wrapper-linux-x86-64 --out-dir Lab6/build_wrapper cmake --build lab6/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab6/build_wrapper cmake --build Lab6/build --config Release
       
       - name: Build Lab7
         run: |
           rm -rf Lab7/build
           mkdir Lab7/build
           cmake -S Lab7 -B Lab7/build 
-          build-wrapper-linux-x86-64 --out-dir Lab7/build_wrapper cmake --build lab7/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab7/build_wrapper cmake --build Lab7/build --config Release
       
       - name: Build Lab8
         run: |
           rm -rf Lab8/build
           mkdir Lab8/build
           cmake -S Lab8 -B Lab8/build 
-          build-wrapper-linux-x86-64 --out-dir Lab8/build_wrapper cmake --build lab8/build --config Release
+          build-wrapper-linux-x86-64 --out-dir Lab8/build_wrapper cmake --build Lab8/build --config Release
 
  - name: SonarCloud scan Lab1
         uses: SonarSource/sonarqube-scan-action@v4

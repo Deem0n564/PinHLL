@@ -26,11 +26,19 @@ jobs:
         run: |
           rm -rf Lab1/build
           mkdir Lab1/build
-          cmake -S Lab1 -B Lab1/build 
+          cmake -S Lab1 -B Lab1/build
           build-wrapper-linux-x86-64 --out-dir Lab1/build_wrapper cmake --build Lab1/build --config Release
 
+      # - name: Build Lab2
+      #   run: |
+      #     rm -rf Lab2/build
+      #     mkdir Lab2/build
+      #     cmake -S Lab2 -B Lab2/build 
+      #     build-wrapper-linux-x86-64 --out-dir Lab2/build_wrapper cmake --build Lab2/build --config Release
 
-         - name: SonarCloud scan Lab1
+      # ... (остальные закомментированные Build шаги) ...
+
+      - name: SonarCloud scan Lab1
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -46,4 +54,20 @@ jobs:
             -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
             -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
-      
+      # - name: SonarCloud scan Lab2
+      #   uses: SonarSource/sonarqube-scan-action@v4
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   with:
+      #     args: >
+      #       -Dsonar.projectKey=deem0n564_Lab2
+      #       -Dsonar.organization=${{ env.SONAR_ORG }}
+      #       -Dsonar.sources=Lab2
+      #       -Dsonar.cfamily.compile-commands=Lab2/build_wrapper/compile_commands.json
+      #       -Dsonar.coverage.exclusions=**
+      #       -Dsonar.cfamily.skipCoverage=true
+      #       -Dsonar.issue.ignore.multicriteria=e1
+      #       -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+      #       -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      # ... (остальные закомментированные SonarCloud шаги) ...

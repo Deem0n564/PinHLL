@@ -5,12 +5,12 @@ project(lab_5)
 include_directories(include)
 
 set(SOURCES
-    sources/main.cpp
-    sources/menu.cpp
+    source/main.cpp
+source/functions.cpp
 )
 
 set(HEADERS
-    headers/menu.h
+    headers/Object.h
     headers/function.h
 )
 

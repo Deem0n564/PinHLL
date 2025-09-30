@@ -8,7 +8,7 @@ int Object::getSerialNumber() const
 
 int checkInputInt()
 {
-	int input;
+	int input = 0;
 
 	while (true)
 	{

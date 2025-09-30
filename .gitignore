@@ -7,6 +7,8 @@
 *.vcxproj
 *.filters
 
+build
+
 # User-specific files
 *.rsuser
 *.suo

@@ -39,7 +39,7 @@ jobs:
       # ... (остальные закомментированные Build шаги) ...
 
       - name: SonarCloud scan Lab1
-        uses: SonarSource/sonarqube-scan-action@v4
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:

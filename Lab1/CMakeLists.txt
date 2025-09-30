@@ -5,8 +5,8 @@ project(lab_5)
 include_directories(include)
 
 set(SOURCES
-    source/main.cpp
-source/functions.cpp
+    sources/main.cpp
+sources/functions.cpp
 )
 
 set(HEADERS

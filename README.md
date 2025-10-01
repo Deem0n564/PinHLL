@@ -6,3 +6,7 @@
 Учащегося 2 курса БГУИР
 
 Буценя Дмитрий Андреевича
+
+Ссылка на SonarQube Cloud:
+
+https://sonarcloud.io/projects

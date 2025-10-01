@@ -1,12 +1,13 @@
 #pragma once
 
 #include <iostream>
+#include "functions.h"
 
 class Matrix
 {
     int rows;
     int cols;
-    double** data;
+    int** data;
 
     void allocate(int r, int c);
     void deallocate();
@@ -54,7 +55,9 @@ public:
     {
         if (rows != rhs.rows || cols != rhs.cols)
         {
-            throw std::invalid_argument("Matrixes must have the same dimensions for addition");
+            std::cout << " Matrixes must have the same dimensions for addition\n";
+
+            return 0;
         }
 
         Matrix result(rows, cols);
@@ -74,15 +77,23 @@ public:
     {
         int r, c;
 
-        is >> r >> c;
-        if (!is) return is;
+        std::cout << " Enter rows: ";
+
+        r = getInputInt();
+
+        std::cout << " Enter cols: ";
+
+        c = getInputInt();
 
         Matrix temp(r, c);
+
         for (int i = 0; i < r; ++i)
         {
             for (int j = 0; j < c; ++j)
             {
-                is >> temp.data[i][j];
+                std::cout << " Enter element(" << i << ")(" << j << "): ";
+
+                temp.data[i][j] = getInputInt();
             }
         }
 
@@ -93,13 +104,13 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Matrix& m)
     {
-        os << m.rows << " " << m.cols << "\n";
+        os << " Rows: Cols:\n" << "  " << m.rows << "     " << m.cols << "\n\n";
 
         for (int i = 0; i < m.rows; ++i)
         {
             for (int j = 0; j < m.cols; ++j)
             {
-                os << m.data[i][j] << " ";
+                os << m.data[i][j] << "  ";
             }
 
             os << "\n";

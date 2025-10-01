@@ -75,7 +75,8 @@ public:
 
     friend std::istream& operator>>(std::istream& is, Matrix& m)
     {
-        int r, c;
+        int r;
+        int c;
 
         std::cout << " Enter rows: ";
 

@@ -98,7 +98,7 @@ public:
             }
         }
 
-        m = std::move(temp);
+        m = temp;
 
         return is;
     }

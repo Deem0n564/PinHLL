@@ -21,7 +21,7 @@ public:
         }
     }
 
-    Matrix(const Matrix& other) : rows(0), cols(0), data(nullptr)
+    Matrix(const Matrix& other) : rows(0), cols(0)
     {
         if (other.rows > 0 && other.cols > 0)
         {

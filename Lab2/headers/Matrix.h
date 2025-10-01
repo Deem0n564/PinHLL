@@ -7,13 +7,13 @@ class Matrix
 {
     int rows;
     int cols;
-    int** data;
+    int** data = nullptr;
 
     void allocate(int r, int c);
     void deallocate();
 
 public:
-    explicit Matrix(int r = 0, int c = 0) : rows(r), cols(c), data(nullptr)
+    explicit Matrix(int r = 0, int c = 0) : rows(r), cols(c)
     {
         if (rows > 0 && cols > 0)
         {

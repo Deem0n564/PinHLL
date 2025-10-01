@@ -13,7 +13,7 @@ class Matrix
     void deallocate();
 
 public:
-    explicit Matrix(int r = 0, int c = 0) : rows(r), cols(c)
+    explicit Matrix(int r = 0, int c = 0) : rows(r), cols(c), data(nullptr)
     {
         if (rows > 0 && cols > 0)
         {
@@ -50,28 +50,6 @@ public:
     {
         deallocate();
     }
-
-    /*friend Matrix operator+(const Matrix& rhs) const
-    {
-        if (rows != rhs.rows || cols != rhs.cols)
-        {
-            std::cout << " Matrixes must have the same dimensions for addition\n";
-
-            exit (0);
-        }
-
-        Matrix result(rows, cols);
-
-        for (int i = 0; i < rows; ++i)
-        {
-            for (int j = 0; j < cols; ++j)
-            {
-                result.data[i][j] = data[i][j] + rhs.data[i][j];
-            }
-        }
-
-        return result;
-    }*/
 
     friend Matrix operator+(const Matrix& a, const Matrix& b)
     {

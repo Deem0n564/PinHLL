@@ -13,11 +13,11 @@ class Matrix
     void deallocate();
 
 public:
-    Matrix(int r = 0, int c = 0) : rows(0), cols(0), data(nullptr)
+    explicit Matrix(int r = 0, int c = 0) : rows(r), cols(c)
     {
-        if (r > 0 && c > 0)
+        if (rows > 0 && cols > 0)
         {
-            allocate(r, c);
+            allocate(rows, cols);
         }
     }
 
@@ -51,13 +51,13 @@ public:
         deallocate();
     }
 
-    Matrix operator+(const Matrix& rhs) const
+    /*friend Matrix operator+(const Matrix& rhs) const
     {
         if (rows != rhs.rows || cols != rhs.cols)
         {
             std::cout << " Matrixes must have the same dimensions for addition\n";
 
-            return 0;
+            exit (0);
         }
 
         Matrix result(rows, cols);
@@ -67,6 +67,28 @@ public:
             for (int j = 0; j < cols; ++j)
             {
                 result.data[i][j] = data[i][j] + rhs.data[i][j];
+            }
+        }
+
+        return result;
+    }*/
+
+    friend Matrix operator+(const Matrix& a, const Matrix& b)
+    {
+        if (a.rows != b.rows || a.cols != b.cols)
+        {
+            std::cout << " Matrixes must have the same dimensions\n";
+
+            exit(0);
+        }
+
+        Matrix result(a.rows, a.cols);
+
+        for (int i = 0; i < a.rows; ++i)
+        {
+            for (int j = 0; j < a.cols; ++j)
+            {
+                result.data[i][j] = a.data[i][j] + b.data[i][j];
             }
         }
 

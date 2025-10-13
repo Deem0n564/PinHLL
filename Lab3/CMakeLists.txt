@@ -19,8 +19,9 @@ set(SOURCES
 )
 
 set(HEADERS
-  ${CMAKE_SOURCE_DIR}/headers/Fakultet.h
+  ${CMAKE_SOURCE_DIR}/headers/Person.h
   ${CMAKE_SOURCE_DIR}/headers/Student.h
+  ${CMAKE_SOURCE_DIR}/headers/Employee.h
 )
 
 # Автоматически добавить все .cpp в sources (альтернатива ручному перечислению)

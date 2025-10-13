@@ -108,20 +108,20 @@ jobs:
             -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
             -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
-      # - name: SonarCloud scan Lab3
-      #   uses: sonarsource/sonarqube-scan-action@v6
-      #   with:
-      #     sonar-token: ${{ secrets.SONAR_TOKEN }}
-      #     args: >
-      #       -Dsonar.projectKey=deem0n564_Lab3
-      #       -Dsonar.organization=${{ env.SONAR_ORG }}
-      #       -Dsonar.sources=Lab3
-      #       -Dsonar.cfamily.compile-commands=Lab3/build_wrapper/compile_commands.json
-      #       -Dsonar.coverage.exclusions=**
-      #       -Dsonar.cfamily.skipCoverage=true
-      #       -Dsonar.issue.ignore.multicriteria=e1
-      #       -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
-      #       -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+      - name: SonarCloud scan Lab3
+        uses: sonarsource/sonarqube-scan-action@v6
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab3
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab3
+            -Dsonar.cfamily.compile-commands=Lab3/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
       # - name: SonarCloud scan Lab4
       #   uses: sonarsource/sonarqube-scan-action@v6

@@ -8,7 +8,7 @@ class Employee : public Person
     int salary;
 
 public:
-    Employee(const std::string& n = "", int y = 0, const std::string& p = "", int s = 0) : Person(n, y), position(p), salary(s) 
+    explicit Employee(const std::string& n = "", int y = 0, const std::string& p = "", int s = 0) : Person(n, y), position(p), salary(s) 
     {
     }
 

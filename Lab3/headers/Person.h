@@ -10,7 +10,7 @@ protected:
     int birthYear;
 
 public:
-    Person(const std::string& n = "", int y = 0) : name(n), birthYear(y) 
+    explicit Person(const std::string& n = "", int y = 0) : name(n), birthYear(y) 
     {
     }
 

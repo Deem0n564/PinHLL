@@ -49,6 +49,7 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 	std::string position;
 	int year;
 	int salary;
+	float avg;
 
 	do
 	{
@@ -60,25 +61,20 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 		{
 		case 1:
 		{
+			std::cout << " Enter name: ";
 			std::cin >> name;
+			std::cout << " Enter birth year: ";
 			year = getInputInt();
-
-			std::cout << " Enter birth year: " << year << '\n';
-			float avg = 0;
 			std::cout << " Enter average grade: ";
-			//avg = getInputFloat();
+			avg = getInputFloat();
+
 			int newCount = (*numS) + 1;
 			auto* tmp = new Student[newCount];
-			tmp = nullptr;
-
-			if (!(*s))
-			{
 
 				for (int i = 0; i < *numS; ++i)
 				{
 					tmp[i] = (*s)[i];
 				}
-			}
 
 			tmp[newCount - 1] = Student(name, year, avg);
 
@@ -111,6 +107,7 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 			tmp[newCount - 1] = Employee(name, year, position, salary);
 
 			delete[] * e;
+
 			*e = tmp;
 			*numE = newCount;
 
@@ -124,7 +121,7 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 
 		case 4:
 				delete[] *s;
-				delete[] * e;
+				delete[] *e;
 			
 			break;
 

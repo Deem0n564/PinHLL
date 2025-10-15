@@ -1,14 +1,25 @@
 #include "Student.h"
 #include "Employee.h"
 
-int main() {
-    Student s("Ivanov I.I.", 2001, 4.25);
+int main() 
+{
+    std::string name; 
+    std::string position;
+    int birthYear;
+    int averageGrade;
+    int salary;
+    
+    std::cout << "\t Enter the student: fio, year of birth, average grades:\n";
+    std::cin >> name >> birthYear >> averageGrade;
+
+    Student s(name, birthYear, averageGrade);
+   
+    std::cout << "\t Enter the employee: fio, year of birth, position, salary:\n";
+    std::cin >> name >> birthYear >> position >> salary;
+
+    Employee e(name, birthYear, position, salary);
+
     s.print();
-
-    s.setAverage(4.5);
-    std::cout << "Updated average: " << s.getAverage() << '\n';
-
-    Employee e("Petrov P.P.", 1985, "Engeneer", 2000);
     e.print();
 
     return 0;

@@ -5,7 +5,7 @@
 
 class Person 
 {
-protected:
+private:
     std::string name;
     int birthYear;
 

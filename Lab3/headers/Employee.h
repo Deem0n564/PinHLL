@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Person.h"
+# include "functions.h"
 
 class Employee : public Person 
 {

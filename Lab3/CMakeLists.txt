@@ -16,12 +16,14 @@ endif()
 # Пути к исходникам и заголовкам (относительно корня, где лежит этот CMakeLists.txt)
 set(SOURCES
   ${CMAKE_SOURCE_DIR}/sources/main.cpp
+  ${CMAKE_SOURCE_DIR}/sources/functions.cpp
 )
 
 set(HEADERS
   ${CMAKE_SOURCE_DIR}/headers/Person.h
   ${CMAKE_SOURCE_DIR}/headers/Student.h
   ${CMAKE_SOURCE_DIR}/headers/Employee.h
+  ${CMAKE_SOURCE_DIR}/headers/functions.h
 )
 
 # Автоматически добавить все .cpp в sources (альтернатива ручному перечислению)

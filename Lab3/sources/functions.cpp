@@ -45,11 +45,6 @@ float getInputFloat()
 void menu(int* numS, int* numE, Student** s, Employee** e)
 {
 	int choise;
-	std::string name;
-	std::string position;
-	int year;
-	int salary;
-	float avg;
 
 	do
 	{
@@ -61,55 +56,13 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 		{
 		case 1:
 		{
-			std::cout << " Enter name: ";
-			std::cin >> name;
-			std::cout << " Enter birth year: ";
-			year = getInputInt();
-			std::cout << " Enter average grade: ";
-			avg = getInputFloat();
-
-			int newCount = (*numS) + 1;
-			auto* tmp = new Student[newCount];
-
-				for (int i = 0; i < *numS; ++i)
-				{
-					tmp[i] = (*s)[i];
-				}
-
-			tmp[newCount - 1] = Student(name, year, avg);
-
-			delete[] * s;
-
-			*s = tmp;
-			*numS = newCount;
-
+			addStudent(numS, s);
+			
 			break;
 		}
 		case 2:
 		{
-			std::cout << " Enter name: ";
-			std::cin >> name;
-			std::cout << " Enter birth year: ";
-			year = getInputInt();
-			std::cout << " Enter position: ";
-			std::cin >> position;
-			std::cout << " Enter salary: ";
-			salary = getInputInt();
-
-			int newCount = (*numE) + 1;
-			auto * tmp = new Employee[newCount];
-
-			for (int i = 0; i < *numE; ++i)
-			{
-				tmp[i] = (*e)[i];
-			}
-
-			tmp[newCount - 1] = Employee(name, year, position, salary);
-
-			delete[] * e;
-
-			*e = tmp;
-			*numE = newCount;
+			addEmployee(numE, e);
 
 			break;
 		}
@@ -162,4 +115,66 @@ void printPersons(int numS, int numE, const Student* s, const Employee* e)
 	{
 		std::cout << " There's no employees added.\n";
 	}
+}
+void addStudent(int* numS, Student** s)
+{
+	std::string name;
+	int year;
+	float avg;
+	int newCount;
+
+	std::cout << " Enter name: ";
+	std::cin >> name;
+	std::cout << " Enter birth year: ";
+	year = getInputInt();
+	std::cout << " Enter average grade: ";
+	avg = getInputFloat();
+
+	newCount = (*numS) + 1;
+	auto* tmp = new Student[newCount];
+
+	for (int i = 0; i < *numS; ++i)
+	{
+		tmp[i] = (*s)[i];
+	}
+
+	tmp[newCount - 1] = Student(name, year, avg);
+
+	delete[] * s;
+
+	*s = tmp;
+	*numS = newCount;
+}
+
+void addEmployee(int* numE, Employee** e)
+{
+	std::string name;
+	int year;
+	std::string position;
+	int salary;
+	int newCount;
+
+	std::cout << " Enter name: ";
+	std::cin >> name;
+	std::cout << " Enter birth year: ";
+	year = getInputInt();
+	std::cout << " Enter position: ";
+	std::cin >> position;
+	std::cout << " Enter salary: ";
+	salary = getInputInt();
+
+	newCount = (*numE) + 1;
+	auto* tmp = new Employee[newCount];
+
+	for (int i = 0; i < *numE; ++i)
+	{
+		tmp[i] = (*e)[i];
+	}
+
+	tmp[newCount - 1] = Employee(name, year, position, salary);
+
+	delete[] * e;
+
+	*e = tmp;
+	*numE = newCount;
 }

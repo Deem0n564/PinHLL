@@ -124,7 +124,7 @@ void addStudent(int* numS, Student** s)
 	int newCount;
 
 	std::cout << " Enter name: ";
-	std::cin >> name;
+	std::getline(std::cin >> std::ws, name);
 	std::cout << " Enter birth year: ";
 	year = getInputInt();
 	std::cout << " Enter average grade: ";
@@ -155,7 +155,7 @@ void addEmployee(int* numE, Employee** e)
 	int newCount;
 
 	std::cout << " Enter name: ";
-	std::cin >> name;
+	std::getline(std::cin >> std::ws, name);
 	std::cout << " Enter birth year: ";
 	year = getInputInt();
 	std::cout << " Enter position: ";

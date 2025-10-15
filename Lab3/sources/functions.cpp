@@ -48,6 +48,7 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 	std::string name;
 	std::string position;
 	int year;
+	int salary;
 
 	do
 	{
@@ -63,15 +64,20 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 			year = getInputInt();
 
 			std::cout << " Enter birth year: " << year << '\n';
-			float avg;
+			float avg = 0;
 			std::cout << " Enter average grade: ";
-			avg = getInputFloat();
+			//avg = getInputFloat();
 			int newCount = (*numS) + 1;
-			Student* tmp = new Student[newCount];
+			auto* tmp = new Student[newCount];
+			tmp = nullptr;
 
-			for (int i = 0; i < *numS; ++i)
+			if (!(*s))
 			{
-				tmp[i] = (*s)[i];
+
+				for (int i = 0; i < *numS; ++i)
+				{
+					tmp[i] = (*s)[i];
+				}
 			}
 
 			tmp[newCount - 1] = Student(name, year, avg);
@@ -85,11 +91,12 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 		}
 		case 2:
 		{
+			std::cout << " Enter name: ";
 			std::cin >> name;
+			std::cout << " Enter birth year: ";
 			year = getInputInt();
-			std::cout << " Enter birth year: " << year << '\n';
+			std::cout << " Enter position: ";
 			std::cin >> position;
-			int salary;
 			std::cout << " Enter salary: ";
 			salary = getInputInt();
 

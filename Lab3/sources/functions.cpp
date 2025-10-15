@@ -23,66 +23,99 @@ int getInputInt()
 	}
 }
 
+float getInputFloat()
+{
+	float input = 0.00f;
+
+	while (true)
+	{
+		if (std::cin >> input)
+		{
+			std::cin.ignore(100, '\n');
+
+			return input;
+		}
+		std::cin.clear();
+		std::cin.ignore(100, '\n');
+
+		std::cout << " Incorrect! Please enter a valid number: ";
+	}
+}
+
 void menu(int* numS, int* numE, Student** s, Employee** e)
 {
 	int choise;
-	int studentOrEmployee;
+	std::string name;
+	std::string position;
+	int year;
 
 	do
 	{
-		std::cout << "\tMENU\n 1. Add person\n 2. Print persons\n 3. Exit\n Your choise is: ";
+		std::cout << "\tMENU\n 1. Add student\n 2. Add employee\n 3. Print persons\n 4. Exit\n Your choise is: ";
 
 		choise = getInputInt();
 
 		switch (choise)
 		{
 		case 1:
-			do
+		{
+			std::cin >> name;
+			year = getInputInt();
+
+			std::cout << " Enter birth year: " << year << '\n';
+			float avg;
+			std::cout << " Enter average grade: ";
+			avg = getInputFloat();
+			int newCount = (*numS) + 1;
+			Student* tmp = new Student[newCount];
+
+			for (int i = 0; i < *numS; ++i)
 			{
-				std::cout << " 1 -- to enter student, 2 to enter employee. ";
+				tmp[i] = (*s)[i];
+			}
 
-				studentOrEmployee = getInputInt();
+			tmp[newCount - 1] = Student(name, year, avg);
 
-				if (studentOrEmployee == 1)
-				{
-					(*numS)++;
-					*s = new Student[*numS];
+			delete[] * s;
 
-				}
-
-				else if (studentOrEmployee == 2)
-				{
-					(*numE)++;
-					*e = new Employee[*numE];
-				}
-
-				else
-				{
-					std::cout << " Incorrect input! Try again.\n";
-				}
-			} while (studentOrEmployee < 1 || studentOrEmployee > 2);
+			*s = tmp;
+			*numS = newCount;
 
 			break;
-
+		}
 		case 2:
-			if (!(*s) && !(*e))
+		{
+			std::cin >> name;
+			year = getInputInt();
+			std::cout << " Enter birth year: " << year << '\n';
+			std::cin >> position;
+			int salary;
+			std::cout << " Enter salary: ";
+			salary = getInputInt();
+
+			int newCount = (*numE) + 1;
+			auto * tmp = new Employee[newCount];
+
+			for (int i = 0; i < *numE; ++i)
 			{
-				std::cout << " There's no students or employees added.\n";
+				tmp[i] = (*e)[i];
 			}
 
-			for (int i = 0; i < *numS; i++)
-			{
-				(*s)[i].print();
-			}
+			tmp[newCount - 1] = Employee(name, year, position, salary);
 
-			for (int i = 0; i < *numE; i++)
-			{
-				(*e)[i].print();
-			}
+			delete[] * e;
+			*e = tmp;
+			*numE = newCount;
 
 			break;
+		}
 
 		case 3:
+			printPersons(*numS, *numE, *s, *e);
+
+			break;
+
+		case 4:
 				delete[] *s;
 				delete[] * e;
 			
@@ -94,5 +127,35 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 			break;
 		}
 
-	} while (choise != 3);
+	} while (choise != 4);
+}
+
+void printPersons(int numS, int numE, const Student* s, const Employee* e)
+{
+	if (s)
+	{
+		for (int i = 0; i < numS; i++)
+		{
+			s[i].print();
+		}
+	}
+
+	else
+	{
+		std::cout << " There's no students added.\n";
+	}
+
+	if (e)
+	{
+
+		for (int i = 0; i < numE; i++)
+		{
+			e[i].print();
+		}
+	}
+
+	else
+	{
+		std::cout << " There's no employees added.\n";
+	}
 }

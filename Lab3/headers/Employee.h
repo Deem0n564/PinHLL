@@ -14,6 +14,6 @@ public:
 
     void print() const 
     {
-        std::cout << "Employee: " << getName() << ", " << position << ", Salary " << salary << ", " << getBirthYear() << " year of birth\n";
+        std::cout << " Employee: " << getName() << ", " << position << ", Salary " << salary << ", " << getBirthYear() << " year of birth\n";
     }
 };

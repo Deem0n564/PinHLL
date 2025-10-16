@@ -17,6 +17,6 @@ public:
 
     void print() const 
     {
-        std::cout << "Student: " << getName() << ", " << getBirthYear() << " year of birth, " << "Average grade: " << averageGrade << '\n';
+        std::cout << " Student: " << getName() << ", " << getBirthYear() << " year of birth, " << "Average grade: " << averageGrade << '\n';
     }
 };

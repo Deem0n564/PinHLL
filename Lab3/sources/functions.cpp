@@ -55,17 +55,14 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
 		switch (choise)
 		{
 		case 1:
-		{
 			addStudent(numS, s);
 			
 			break;
-		}
+
 		case 2:
-		{
 			addEmployee(numE, e);
 
 			break;
-		}
 
 		case 3:
 			printPersons(*numS, *numE, *s, *e);

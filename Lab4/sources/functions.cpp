@@ -138,9 +138,8 @@ void menu(Person*** people, int& count, const int& choice)
         std::cout << "\n Who sees (index): ";
         int a = getInputInt();
         std::cout << " Who is seen (index): ";
-        int b = getInputInt();
 
-        if (a == b)
+        if (int b = getInputInt(); a == b)
         {
             std::cout << " Cannot react to oneself(\n";
         }

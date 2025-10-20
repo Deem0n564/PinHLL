@@ -8,13 +8,13 @@ int main()
 
 	do
 	{
-		std::cout << "\n MENU\n"
-			<< "1. Add girl\n"
-			<< "2. Add man\n"
-			<< "3. Print peoples\n"
-			<< "4. *** react to ###\n"
-			<< "5. Delete person\n"
-			<< "0. Exit\n"
+		std::cout << "\tMENU\n"
+			<< " 1. Add girl\n"
+			<< " 2. Add man\n"
+			<< " 3. Print peoples\n"
+			<< " 4. *** react to ###\n"
+			<< " 5. Delete person\n"
+			<< " 0. Exit\n"
 			<< " Your choise is: ";
 
 		choise = getInputInt();

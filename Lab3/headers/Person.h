@@ -1,6 +1,6 @@
 #pragma once
 
-# include "functions.h"
+#include "functions.h"
 
 class Person 
 {
@@ -9,17 +9,7 @@ private:
     int birthYear;
 
 public:
-    explicit Person(const std::string& n = "", int y = 0) : name(n), birthYear(y) 
-    {
-    }
-
-    int getBirthYear() const 
-    { 
-        return birthYear; 
-    }
-
-    std::string getName() const 
-    { 
-        return name; 
-    }
+    explicit Person(const std::string& n = "", int y = 0) : name(n), birthYear(y) {}
+    int getBirthYear() const;
+    std::string getName() const;
 };

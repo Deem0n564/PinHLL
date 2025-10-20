@@ -18,14 +18,14 @@ set(SOURCES
   ${CMAKE_SOURCE_DIR}/sources/main.cpp
   ${CMAKE_SOURCE_DIR}/sources/functions.cpp
   ${CMAKE_SOURCE_DIR}/sources/Person.cpp
-  ${CMAKE_SOURCE_DIR}/sources/Student.cpp
-  ${CMAKE_SOURCE_DIR}/sources/Employee.cpp
+  ${CMAKE_SOURCE_DIR}/sources/Man.cpp
+  ${CMAKE_SOURCE_DIR}/sources/Girl.cpp
 )
 
 set(HEADERS
   ${CMAKE_SOURCE_DIR}/headers/Person.h
-  ${CMAKE_SOURCE_DIR}/headers/Student.h
-  ${CMAKE_SOURCE_DIR}/headers/Employee.h
+  ${CMAKE_SOURCE_DIR}/headers/Man.h
+  ${CMAKE_SOURCE_DIR}/headers/Girl.h
   ${CMAKE_SOURCE_DIR}/headers/functions.h
 )
 

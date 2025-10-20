@@ -43,12 +43,12 @@ jobs:
           cmake -S Lab3 -B Lab3/build
           build-wrapper-linux-x86-64 --out-dir Lab3/build_wrapper cmake --build Lab3/build --config Release
 
-      # - name: Build Lab4
-      #   run: |
-      #     rm -rf Lab4/build
-      #     mkdir -p Lab4/build
-      #     cmake -S Lab4 -B Lab4/build
-      #     build-wrapper-linux-x86-64 --out-dir Lab4/build_wrapper cmake --build Lab4/build --config Release
+      - name: Build Lab4
+        run: |
+          rm -rf Lab4/build
+          mkdir -p Lab4/build
+          cmake -S Lab4 -B Lab4/build
+          build-wrapper-linux-x86-64 --out-dir Lab4/build_wrapper cmake --build Lab4/build --config Release
 
       # - name: Build Lab5
       #   run: |
@@ -123,20 +123,20 @@ jobs:
             -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
             -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
-      # - name: SonarCloud scan Lab4
-      #   uses: sonarsource/sonarqube-scan-action@v6
-      #   with:
-      #     sonar-token: ${{ secrets.SONAR_TOKEN }}
-      #     args: >
-      #       -Dsonar.projectKey=deem0n564_Lab4
-      #       -Dsonar.organization=${{ env.SONAR_ORG }}
-      #       -Dsonar.sources=Lab4
-      #       -Dsonar.cfamily.compile-commands=Lab4/build_wrapper/compile_commands.json
-      #       -Dsonar.coverage.exclusions=**
-      #       -Dsonar.cfamily.skipCoverage=true
-      #       -Dsonar.issue.ignore.multicriteria=e1
-      #       -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
-      #       -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+      - name: SonarCloud scan Lab4
+        uses: sonarsource/sonarqube-scan-action@v6
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab4
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab4
+            -Dsonar.cfamily.compile-commands=Lab4/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cxx:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
       # - name: SonarCloud scan Lab5
       #   uses: sonarsource/sonarqube-scan-action@v6

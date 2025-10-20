@@ -8,4 +8,5 @@
 
 int getInputInt();
 void allocPerson(Person*** arr, int count);
-void menu(Person*** people, int& count, int& choice);
+bool readNameAndAge(std::string& name, int& age);
+void menu(Person*** people, int& count, const int& choice);

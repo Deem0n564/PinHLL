@@ -27,7 +27,7 @@ void allocPerson(Person*** arr, int count)
 {
 	int newSize = count + 1;
 
-	Person** newArr = new Person * [newSize];
+	auto** newArr = new Person * [newSize];
 
 	if (*arr != nullptr) 
 	{
@@ -44,47 +44,62 @@ void allocPerson(Person*** arr, int count)
 	*arr = newArr;
 }
 
-void menu(Person*** people, int& count, int& choice) 
+bool readNameAndAge(std::string& name, int& age) 
 {
+    std::cout << "\n Enter name: ";
+    std::getline(std::cin, name);
+
+    if (name.empty()) 
+    {
+        std::getline(std::cin, name);
+    }
+
+    if (name.empty()) 
+    {
+        return false;
+    }
+
+    std::cout << " Enter age: ";
+    age = getInputInt();
+
+    return true;
+}
+
+void menu(Person*** people, int& count, const int& choice) 
+{
+    std::string name;
+    int age;
+
     switch (choice)
     {
     case 1:
     {
-        std::cout << " Enter name: ";
-        std::string name;
-        std::getline(std::cin, name);
-
-        if (name.empty())
+        if (!readNameAndAge(name, age)) 
         {
-            std::getline(std::cin, name);
+            std::cout << "\n Name input failed.\n";
+
+            break;
         }
 
-        std::cout << " Enter age: ";
-        int age = getInputInt();
         allocPerson(people, count);
         (*people)[count] = new Girl(name, age);
-        std::cout << " Added girl #" << count << " (" << name << ")\n";
+        std::cout << "\n Added girl #" << count << " (" << name << ")\n";
         ++count;
-
         break;
     }
 
     case 2:
     {
-        std::cout << " Enter name: ";
-        std::string name;
-        std::getline(std::cin, name);
-
-        if (name.empty())
+        if (!readNameAndAge(name, age)) 
         {
-            std::getline(std::cin, name);
+            std::cout << "\n Name input failed.\n";
+
+            break;
         }
 
-        std::cout << " Enter age: ";
-        int age = getInputInt();
         allocPerson(people, count);
         (*people)[count] = new Man(name, age);
-        std::cout << " Added man #" << count << " (" << name << ")\n";
+        std::cout << "\n Added man #" << count << " (" << name << ")\n";
         ++count;
 
         break;
@@ -94,12 +109,12 @@ void menu(Person*** people, int& count, int& choice)
     {
         if (count == 0)
         {
-            std::cout << " List is empty(\n";
+            std::cout << "\n List is empty(\n";
         }
 
         else
         {
-            std::cout << " People list:\n";
+            std::cout << "\n People list:\n";
 
             for (int i = 0; i < count; ++i)
             {
@@ -115,12 +130,12 @@ void menu(Person*** people, int& count, int& choice)
     {
         if (count < 2)
         {
-            std::cout << " Need at least 2 people(\n";
+            std::cout << "\n Need at least 2 people(\n";
 
             break;
         }
 
-        std::cout << " Who sees (index): ";
+        std::cout << "\n Who sees (index): ";
         int a = getInputInt();
         std::cout << " Who is seen (index): ";
         int b = getInputInt();
@@ -142,12 +157,12 @@ void menu(Person*** people, int& count, int& choice)
     {
         if (count == 0)
         {
-            std::cout << " List is empty(\n";
+            std::cout << "\n List is empty(\n";
 
             break;
         }
 
-        std::cout << " Index to delete: ";
+        std::cout << "\n Index to delete: ";
         int idx = getInputInt();
         delete (*people)[idx];
 
@@ -158,7 +173,7 @@ void menu(Person*** people, int& count, int& choice)
 
         --count;
 
-        std::cout << " Deleted.\n";
+        std::cout << "\n Deleted.\n";
 
         break;
     }
@@ -174,7 +189,7 @@ void menu(Person*** people, int& count, int& choice)
         *people = nullptr;
         count = 0;
 
-        std::cout << " Cleared all.\n";
+        std::cout << "\n Cleared all.\n";
 
         break;
     }

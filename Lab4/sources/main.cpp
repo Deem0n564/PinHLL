@@ -8,7 +8,7 @@ int main()
 
 	do
 	{
-		std::cout << " MENU\n"
+		std::cout << "\n MENU\n"
 			<< "1. Add girl\n"
 			<< "2. Add man\n"
 			<< "3. Print peoples\n"
@@ -29,7 +29,7 @@ int main()
 
 	delete[] people;
 
-	std::cout << " Exit.\n";
+	std::cout << "\n Exit.\n";
 
 	return 0;
 }

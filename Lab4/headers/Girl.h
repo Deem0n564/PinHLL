@@ -5,7 +5,6 @@
 class Girl : public Person
 {
 public:
-    Girl(const std::string& name, int age)
-        : Person(name, age) {};
+    using Person::Person;
     void reactTo(const Person& other) const override;
 };

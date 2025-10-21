@@ -83,7 +83,7 @@ void menu(Person*** people, int& count, const int& choice)
 
         allocPerson(people, count);
         (*people)[count] = new Girl(name, age);
-        std::cout << "\n Added girl #" << count << " (" << name << ")\n";
+        std::cout << "\n Added girl #" << count << " (" << name << ")\n\n";
         ++count;
         break;
     }
@@ -99,7 +99,7 @@ void menu(Person*** people, int& count, const int& choice)
 
         allocPerson(people, count);
         (*people)[count] = new Man(name, age);
-        std::cout << "\n Added man #" << count << " (" << name << ")\n";
+        std::cout << "\n Added man #" << count << " (" << name << ")\n\n";
         ++count;
 
         break;

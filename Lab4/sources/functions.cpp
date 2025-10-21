@@ -156,8 +156,6 @@ void menu(Person*** people, int& count, const int& choice)
     {
         if (count == 0)
         {
-            std::cout << "\n List is empty(\n";
-
             break;
         }
 

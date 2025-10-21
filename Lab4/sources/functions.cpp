@@ -40,7 +40,6 @@ void allocPerson(Person*** arr, int count)
 	}
 
 	newArr[count] = nullptr;
-
 	*arr = newArr;
 }
 

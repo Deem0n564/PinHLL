@@ -221,7 +221,7 @@ void charMenu(int choice, int* size, char** arr)
 			newArr[i] = temp[i];
 		}
 
-		newArr[*size] = getchar();
+		std::cin >> newArr[*size];
 		delete[]temp;
 		*arr = newArr;
 		(*size)++;
@@ -246,7 +246,7 @@ void charMenu(int choice, int* size, char** arr)
 	{
 		std::cout << " 3. Find by key:\n\n Enter key: ";
 
-		key = getchar();
+		std::cin >> key;
 
 		findByKeyTemplate(*arr, *size, key);
 

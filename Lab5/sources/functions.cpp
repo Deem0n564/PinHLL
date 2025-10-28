@@ -255,6 +255,8 @@ void charMenu(int choice, int* size, char** arr)
 
 	case 0:
 	{
+		delete[] * arr;
+
 		break;
 	}
 
@@ -287,7 +289,7 @@ void intMenu(int choice, int* size, int** arr)
 			newArr[i] = temp[i];
 		}
 
-		newArr[*size] = getInputDouble();
+		newArr[*size] = getInputInt();
 		delete[]temp;
 		*arr = newArr;
 		(*size)++;
@@ -321,6 +323,8 @@ void intMenu(int choice, int* size, int** arr)
 
 	case 0:
 	{
+		delete[] * arr;
+
 		break;
 	}
 
@@ -387,6 +391,8 @@ void floatMenu(int choice, int* size, float** arr)
 
 	case 0:
 	{
+		delete[] * arr;
+
 		break;
 	}
 
@@ -453,6 +459,8 @@ void doubleMenu(int choice, int* size, double** arr)
 
 	case 0:
 	{
+		delete[] * arr;
+
 		break;
 	}
 

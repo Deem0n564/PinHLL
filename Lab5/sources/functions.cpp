@@ -248,7 +248,14 @@ void charMenu(int choice, int* size, char** arr)
 
 		std::cin >> key;
 
-		findByKeyTemplate(*arr, *size, key);
+		if (findByKeyTemplate(*arr, *size, key) == -1)
+		{
+			std::cout << "\n Key is not found.\n";
+
+			break;
+		}
+
+		std::cout << " Key is founded on " << findByKeyTemplate(*arr, *size, key) << " element\n";
 
 		break;
 	}
@@ -316,7 +323,14 @@ void intMenu(int choice, int* size, int** arr)
 
 		key = getInputInt();
 
-		findByKeyTemplate(*arr, *size, key);
+		if (findByKeyTemplate(*arr, *size, key) == -1)
+		{
+			std::cout << "\n Key is not found.\n";
+
+			break;
+		}
+
+		std::cout << " Key is founded on " << findByKeyTemplate(*arr, *size, key) << " element\n";
 
 		break;
 	}
@@ -384,7 +398,14 @@ void floatMenu(int choice, int* size, float** arr)
 
 		key = getInputFloat();
 
-		findByKeyTemplate(*arr, *size, key);
+		if (findByKeyTemplate(*arr, *size, key) == -1)
+		{
+			std::cout << "\n Key is not found.\n";
+
+			break;
+		}
+
+		std::cout << " Key is founded on " << findByKeyTemplate(*arr, *size, key) << " element\n";
 
 		break;
 	}
@@ -452,7 +473,14 @@ void doubleMenu(int choice, int* size, double** arr)
 
 		key = getInputDouble();
 
-		findByKeyTemplate(*arr, *size, key);
+		if (findByKeyTemplate(*arr, *size, key) == -1)
+		{
+			std::cout << "\n Key is not found.\n";
+
+			break;
+		}
+
+		std::cout << " Key is founded on " << findByKeyTemplate(*arr, *size, key) << " element\n";
 
 		break;
 	}

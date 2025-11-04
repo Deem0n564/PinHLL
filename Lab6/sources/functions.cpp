@@ -1,15 +1,22 @@
 #include "functions.h"
 
-// Проверка, что строка содержит только латинские буквы, пробел или дефис
 bool isEnglishString(const std::string& s)
 {
-    if (s.empty()) return false;
+    if (s.empty())
+    {
+        return false;
+    }
+
     for (unsigned char ch : s)
     {
         if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == ' ' || ch == '-')
+        {
             continue;
+        }
+
         return false;
     }
+
     return true;
 }
 
@@ -21,27 +28,34 @@ int getInputInt()
         if (std::cin >> input)
         {
             std::cin.ignore(100, '\n');
+
             return input;
         }
+
         std::cin.clear();
         std::cin.ignore(100, '\n');
-        std::cout << " Неверно! Введите целое число: ";
+
+        std::cout << " Incorrect( Please enter correct integer: ";
     }
 }
 
 float getInputFloat()
 {
     float input = 0.0f;
+
     while (true)
     {
         if (std::cin >> input)
         {
             std::cin.ignore(100, '\n');
+
             return input;
         }
+
         std::cin.clear();
         std::cin.ignore(100, '\n');
-        std::cout << " Неверно! Введите число (например 4.5): ";
+
+        std::cout << " Incorrect( Please enter correct number: ";
     }
 }
 
@@ -49,20 +63,28 @@ void printPersons(int numS, int numE, const Student* s, const Employee* e)
 {
     if (s && numS > 0)
     {
-        for (int i = 0; i < numS; ++i) s[i].print();
+        for (int i = 0; i < numS; ++i) 
+        {
+            s[i].print();
+        }
     }
+
     else
     {
-        std::cout << " Нет добавленных студентов.\n";
+        std::cout << " No students added. \n";
     }
 
     if (e && numE > 0)
     {
-        for (int i = 0; i < numE; ++i) e[i].print();
+        for (int i = 0; i < numE; ++i) 
+        {
+            e[i].print();
+        }
     }
+
     else
     {
-        std::cout << " Нет добавленных сотрудников.\n";
+        std::cout << " No employees added. \n";
     }
 }
 
@@ -74,7 +96,11 @@ void addStudent(int* numS, Student** s)
 
     std::cout << " Enter name: ";
     std::getline(std::cin >> std::ws, name);
-    if (!isEnglishString(name)) throw NotEnglishException("student name");
+
+    if (!isEnglishString(name)) 
+    {
+        throw NotEnglishException("student name");
+    }
 
     std::cout << " Enter birth year: ";
     year = getInputInt();
@@ -88,12 +114,18 @@ void addStudent(int* numS, Student** s)
     try
     {
         tmp = new Student[newCount];
-        for (int i = 0; i < *numS; ++i) tmp[i] = (*s)[i];
+
+        for (int i = 0; i < *numS; ++i) 
+        {
+            tmp[i] = (*s)[i];
+        }
+
         tmp[newCount - 1] = Student(name, year, avg);
         delete[] * s;
         *s = tmp;
         *numS = newCount;
     }
+
     catch (...)
     {
         delete[] tmp;
@@ -110,14 +142,22 @@ void addEmployee(int* numE, Employee** e)
 
     std::cout << " Enter name: ";
     std::getline(std::cin >> std::ws, name);
-    if (!isEnglishString(name)) throw NotEnglishException("employee name");
+
+    if (!isEnglishString(name)) 
+    {
+        throw NotEnglishException("employee name");
+    }
 
     std::cout << " Enter birth year: ";
     year = getInputInt();
 
     std::cout << " Enter position: ";
     std::getline(std::cin >> std::ws, position);
-    if (!isEnglishString(position)) throw NotEnglishException("position");
+
+    if (!isEnglishString(position)) 
+    {
+        throw NotEnglishException("position");
+    }
 
     std::cout << " Enter salary: ";
     salary = getInputInt();
@@ -128,12 +168,18 @@ void addEmployee(int* numE, Employee** e)
     try
     {
         tmp = new Employee[newCount];
-        for (int i = 0; i < *numE; ++i) tmp[i] = (*e)[i];
+
+        for (int i = 0; i < *numE; ++i) 
+        {
+            tmp[i] = (*e)[i];
+        }
+
         tmp[newCount - 1] = Employee(name, year, position, salary);
         delete[] * e;
         *e = tmp;
         *numE = newCount;
     }
+
     catch (...)
     {
         delete[] tmp;
@@ -154,37 +200,60 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
             switch (choice)
             {
             case 1:
+            {
                 addStudent(numS, s);
-                break;
-            case 2:
-                addEmployee(numE, e);
-                break;
-            case 3:
-                printPersons(*numS, *numE, *s, *e);
-                break;
-            case 4:
-                delete[] * s;
-                delete[] * e;
-                break;
-            default:
-                std::cout << " Неверный выбор, попробуйте снова.\n";
+
                 break;
             }
+
+            case 2:
+            {
+                addEmployee(numE, e);
+
+                break;
+            }
+
+            case 3:
+            {
+                printPersons(*numS, *numE, *s, *e);
+
+                break;
+            }
+
+            case 4:
+            {
+                delete[] * s;
+                delete[] * e;
+
+                break;
+            }
+
+            default:
+            {
+                std::cout << " Incorrect choice( Please, try again \n";
+
+                break;
+            }
+            }
         }
+
         catch (const NotEnglishException& ex)
         {
             std::cout << "Input error: " << ex.what() << '\n';
         }
+
         catch (const std::bad_alloc&)
         {
-            std::cout << " Ошибка: недостаточно памяти\n";
+            std::cout << " Error: not enough memory \n";
+
             delete[] * s;
             delete[] * e;
-            throw; // пробрасываем дальше в main
+            throw;
         }
+
         catch (const std::exception& ex)
         {
-            std::cout << " Ошибка: " << ex.what() << '\n';
+            std::cout << " Error: " << ex.what() << '\n';
         }
 
     } while (choice != 4);

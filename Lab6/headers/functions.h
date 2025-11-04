@@ -8,7 +8,7 @@
 #include "Employee.h"
 #include "NotEnglishException.h"
 
-bool isEnglishString(const std::string& s);
+bool isEnglishString(std::string& s);
 int getInputInt();
 float getInputFloat();
 void menu(int* numS, int* numE, Student** s, Employee** e);

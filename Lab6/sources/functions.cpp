@@ -39,7 +39,7 @@ float getInputFloat()
     }
 }
 
-bool isEnglishString(const std::string& s)
+bool isEnglishString(std::string& s)
 {
     if (s.empty())
     {

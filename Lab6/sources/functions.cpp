@@ -249,6 +249,11 @@ void menu(int* numS, int* numE, Student** s, Employee** e)
             throw;
         }
 
+        catch (const std::invalid_argument& ex)
+        {
+            std::cout << "Invalid input: " << ex.what() << '\n';
+        }
+
         catch (const std::exception& ex)
         {
             std::cout << " Error: " << ex.what() << '\n';

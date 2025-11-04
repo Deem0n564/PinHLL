@@ -1,6 +1,6 @@
 #include "functions.h"
 
-void Employee::print() const
+void Employee::print(int i) const
 {
-    std::cout << " Employee: " << getName() << ", " << position << ", Salary " << salary << ", " << getBirthYear() << " year of birth\n";
+    std::cout << " Employee[" << i << "]: " << getName() << ", " << position << ", Salary " << salary << ", " << getBirthYear() << " year of birth\n";
 }

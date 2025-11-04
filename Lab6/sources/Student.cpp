@@ -5,7 +5,7 @@ float Student::getAverage() const
     return averageGrade;
 }
 
-void Student::print() const
+void Student::print(int i) const
 {
-    std::cout << " Student: " << getName() << ", " << getBirthYear() << " year of birth, " << "Average grade: " << averageGrade << '\n';
+    std::cout << " Student[" << i << "]: " << getName() << ", " << getBirthYear() << " year of birth, " << "Average grade: " << averageGrade << '\n';
 }

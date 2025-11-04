@@ -8,5 +8,5 @@ class Student : public Person
 public:
     explicit Student(const std::string& n = "", int y = 0, float avg = 0.0) : Person(n, y), averageGrade(avg) {}
     float getAverage() const;
-    void print() const;
+    void print(int i) const;
 };

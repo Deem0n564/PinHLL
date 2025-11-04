@@ -63,7 +63,7 @@ void printPersons(int numS, int numE, const Student* s, const Employee* e)
     {
         for (int i = 0; i < numS; ++i) 
         {
-            s[i].print();
+            s[i].print(i);
         }
     }
 
@@ -76,7 +76,7 @@ void printPersons(int numS, int numE, const Student* s, const Employee* e)
     {
         for (int i = 0; i < numE; ++i) 
         {
-            e[i].print();
+            e[i].print(i);
         }
     }
 

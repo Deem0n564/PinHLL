@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "Person.h"
 #include "Student.h"
 #include "Employee.h"

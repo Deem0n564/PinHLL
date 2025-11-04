@@ -1,25 +1,5 @@
 #include "functions.h"
 
-bool isEnglishString(const std::string& s)
-{
-    if (s.empty())
-    {
-        return false;
-    }
-
-    for (unsigned char ch : s)
-    {
-        if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == ' ' || ch == '-')
-        {
-            continue;
-        }
-
-        return false;
-    }
-
-    return true;
-}
-
 int getInputInt()
 {
     int input = 0;
@@ -57,6 +37,24 @@ float getInputFloat()
 
         std::cout << " Incorrect( Please enter correct number: ";
     }
+}
+
+bool isEnglishString(const std::string& s)
+{
+    if (s.empty())
+    {
+        return false;
+    }
+
+    return std::all_of(s.begin(), s.end(), [](unsigned char ch)
+        {
+            return (ch >= 'A' && ch <= 'Z')
+                || (ch >= 'a' && ch <= 'z')
+                || ch == ' '
+                || ch == '-'
+                || ch == '`';
+        }
+    );
 }
 
 void printPersons(int numS, int numE, const Student* s, const Employee* e)

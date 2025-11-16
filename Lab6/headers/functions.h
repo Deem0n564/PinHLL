@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <stdexcept>
 #include "Person.h"
 #include "Student.h"
 #include "Employee.h"

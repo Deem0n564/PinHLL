@@ -1,7 +1,6 @@
 #pragma once
 
 #include "functions.h"
-#include <stdexcept>
 
 class NotEnglishException : public std::runtime_error
 {

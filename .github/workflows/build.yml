@@ -153,35 +153,35 @@ jobs:
       #       -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cpp:S5025
       #       -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
-      - name: SonarCloud scan Lab6
-        uses: sonarsource/sonarqube-scan-action@v6
-        with:
-          sonar-token: ${{ secrets.SONAR_TOKEN }}
-          args: >
-            -Dsonar.projectKey=deem0n564_Lab6
-            -Dsonar.organization=${{ env.SONAR_ORG }}
-            -Dsonar.sources=Lab6
-            -Dsonar.cfamily.compile-commands=Lab6/build_wrapper/compile_commands.json
-            -Dsonar.coverage.exclusions=**
-            -Dsonar.cfamily.skipCoverage=true
-            -Dsonar.issue.ignore.multicriteria=e1
-            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cpp:S5025
-            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
-
-      # - name: SonarCloud scan Lab7
+      # - name: SonarCloud scan Lab6
       #   uses: sonarsource/sonarqube-scan-action@v6
       #   with:
       #     sonar-token: ${{ secrets.SONAR_TOKEN }}
       #     args: >
-      #       -Dsonar.projectKey=deem0n564_Lab7
+      #       -Dsonar.projectKey=deem0n564_Lab6
       #       -Dsonar.organization=${{ env.SONAR_ORG }}
-      #       -Dsonar.sources=Lab7
-      #       -Dsonar.cfamily.compile-commands=Lab7/build_wrapper/compile_commands.json
+      #       -Dsonar.sources=Lab6
+      #       -Dsonar.cfamily.compile-commands=Lab6/build_wrapper/compile_commands.json
       #       -Dsonar.coverage.exclusions=**
       #       -Dsonar.cfamily.skipCoverage=true
       #       -Dsonar.issue.ignore.multicriteria=e1
       #       -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cpp:S5025
       #       -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
+
+      - name: SonarCloud scan Lab7
+        uses: sonarsource/sonarqube-scan-action@v6
+        with:
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.projectKey=deem0n564_Lab7
+            -Dsonar.organization=${{ env.SONAR_ORG }}
+            -Dsonar.sources=Lab7
+            -Dsonar.cfamily.compile-commands=Lab7/build_wrapper/compile_commands.json
+            -Dsonar.coverage.exclusions=**
+            -Dsonar.cfamily.skipCoverage=true
+            -Dsonar.issue.ignore.multicriteria=e1
+            -Dsonar.issue.ignore.multicriteria.e1.ruleKey=cpp:S5025
+            -Dsonar.issue.ignore.multicriteria.e1.resourceKey=**/*
 
       # - name: SonarCloud scan Lab8
       #   uses: sonarsource/sonarqube-scan-action@v6

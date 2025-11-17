@@ -1,203 +1,116 @@
 #include "functions.h"
+#include "FileReader.h"
 
-int getInputInt()
+#include <iostream>
+#include <fstream>
+#include <cstdint>
+#include <stdexcept>
+
+void write_mode(const std::string& fname)
 {
-	int input = 0;
-
-	while (true)
-	{
-		if (std::cin >> input)
-		{
-			std::cin.ignore(100, '\n');
-
-			return input;
-		}
-
-		else
-		{
-			std::cin.clear();
-			std::cin.ignore(100, '\n');
-
-			std::cout << " Incorrect! Please enter a valid integer: ";
-		}
-	}
-}
-
-void allocPerson(Person*** arr, int count) 
-{
-	int newSize = count + 1;
-
-	auto** newArr = new Person * [newSize];
-
-	if (*arr != nullptr) 
-	{
-		for (int i = 0; i < count; ++i) 
-		{
-			newArr[i] = (*arr)[i];
-		}
-
-		delete[] * arr;
-	}
-
-	newArr[count] = nullptr;
-	*arr = newArr;
-}
-
-bool readNameAndAge(std::string& name, int& age) 
-{
-    std::cout << "\n Enter name: ";
-    std::getline(std::cin, name);
-
-    if (name.empty()) 
+    std::ofstream out(fname, std::ios::binary);
+    if (!out.is_open())
     {
-        std::getline(std::cin, name);
+        std::cerr << "Cannot create file: " << fname << "\n";
+
+        return;
     }
 
-    if (name.empty()) 
+    std::cout << "Write mode. How many int32 values do you want to write? ";
+    std::size_t n;
+
+    if (!(std::cin >> n))
     {
-        return false;
+        std::cerr << "Invalid number of elements\n";
+
+        return;
     }
 
-    std::cout << " Enter age: ";
-    age = getInputInt();
+    std::cout << "Enter values one by one (int32). Press Enter after each.\n";
 
-    return true;
-}
-
-void menu(Person*** people, int& count, const int& choice) 
-{
-    std::string name;
-    int age;
-
-    switch (choice)
+    for (std::size_t i = 0; i < n; ++i)
     {
-    case 1:
-    {
-        if (!readNameAndAge(name, age)) 
+        int32_t val;
+        std::cout << "element[" << i << "] = ";
+
+        if (!(std::cin >> val))
         {
-            std::cout << "\n Name input failed.\n";
+            std::cerr << "Invalid input\n";
 
-            break;
+            return;
         }
 
-        allocPerson(people, count);
-        (*people)[count] = new Girl(name, age);
-        std::cout << "\n Added girl #" << count << " (" << name << ")\n\n";
-        ++count;
-        break;
+        out.write(reinterpret_cast<const char*>(&val), static_cast<std::streamsize>(sizeof(val)));
+
+        if (!out)
+        {
+            std::cerr << "Error writing to file\n";
+
+            return;
+        }
     }
 
-    case 2:
-    {
-        if (!readNameAndAge(name, age)) 
-        {
-            std::cout << "\n Name input failed.\n";
+    std::cout << "Writing finished. File: " << fname << "\n";
+}
 
-            break;
+void read_mode(const std::string& fname)
+{
+    try
+    {
+        FileReader fr(fname);
+        std::cout << "Opened file: " << fname << "\n";
+        auto sz = fr.sizeBytes();
+        std::cout << "File size: " << sz << " bytes\n";
+
+        std::cout << "Choose read type:\n";
+        std::cout << "  1 - int32 (whole element)\n";
+        std::cout << "  2 - uint8 (byte indexing)\n";
+        std::cout << "Enter 1 or 2: ";
+        int choice = 0;
+
+        if (!(std::cin >> choice))
+        {
+            std::cerr << "Invalid input\n";
+
+            return;
         }
 
-        allocPerson(people, count);
-        (*people)[count] = new Man(name, age);
-        std::cout << "\n Added man #" << count << " (" << name << ")\n\n";
-        ++count;
+        std::cout << "Enter index (0-based): ";
+        std::size_t idx = 0;
 
-        break;
-    }
-
-    case 3:
-    {
-        if (count == 0)
+        if (!(std::cin >> idx))
         {
-            std::cout << "\n List is empty(\n";
+            std::cerr << "Invalid index input\n";
+
+            return;
         }
 
-        else
+        try
         {
-            std::cout << "\n People list:\n";
-
-            for (int i = 0; i < count; ++i)
+            if (choice == 1)
             {
-                std::cout << i << ": " << (*people)[i]->getName()
-                    << ", " << (*people)[i]->getAge() << " years\n";
+                // index in int32 elements (each element is 4 bytes)
+                int32_t v = fr.readAtIndex<int32_t>(idx);
+                std::cout << "element[" << idx << "] (int32) = " << v << "\n";
+            }
+
+            else
+            {
+                // index in uint8 elements (i.e. byte index)
+                uint8_t b = fr.readAtIndex<uint8_t>(idx);
+                std::cout << "byte[" << idx << "] (uint8) = " << static_cast<int>(b) << "\n";
             }
         }
 
-        break;
+        catch (const std::exception& e)
+        {
+            std::cout << "Read error: " << e.what() << "\n";
+        }
+
     }
 
-    case 4:
+    catch (const std::exception& e)
     {
-        if (count < 2)
-        {
-            std::cout << "\n Need at least 2 people(\n";
-
-            break;
-        }
-
-        std::cout << "\n Who sees (index): ";
-        int a = getInputInt();
-        std::cout << " Who is seen (index): ";
-
-        if (int b = getInputInt(); a == b)
-        {
-            std::cout << " Cannot react to oneself(\n";
-        }
-
-        else
-        {
-            (*people)[a]->reactTo(*(*people)[b]);
-        }
-
-        break;
-    }
-
-    case 5:
-    {
-        if (count == 0)
-        {
-            break;
-        }
-
-        std::cout << "\n Index to delete: ";
-        int idx = getInputInt();
-        delete (*people)[idx];
-
-        for (int i = idx; i < count - 1; ++i)
-        {
-            (*people)[i] = (*people)[i + 1];
-        }
-
-        --count;
-
-        std::cout << "\n Deleted.\n";
-
-        break;
-    }
-
-    case 6:
-    {
-        for (int i = 0; i < count; ++i)
-        {
-            delete (*people)[i];
-        }
-
-        delete[] * people;
-        *people = nullptr;
-        count = 0;
-
-        std::cout << "\n Cleared all.\n";
-
-        break;
-    }
-
-    case 0:
-    {
-        break;
-    }
-
-    default:
-    {
-        break;
-    }
+        std::cerr << "Failed to open file: " << e.what() << "\n";
     }
 }

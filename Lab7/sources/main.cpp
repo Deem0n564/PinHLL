@@ -1,35 +1,43 @@
 #include "functions.h"
 
-int main()
+#include <iostream>
+#include <string>
+
+int main() 
 {
-	Person** people = nullptr;
-	int count = 0;
-	int choise;
+    const std::string fname = "data.bin";
+    std::cout << "\tProgram for writing/reading binary file data.bin\n"
+        << " Choose mode:\n"
+        << "   w - write\n"
+        << "   r - read\n"
+        << " Enter w or r: ";
 
-	do
-	{
-		std::cout << "\tMENU\n"
-			<< " 1. Add girl\n"
-			<< " 2. Add man\n"
-			<< " 3. Print peoples\n"
-			<< " 4. *** react to ###\n"
-			<< " 5. Delete person\n"
-			<< " 0. Exit\n"
-			<< " Your choise is: ";
+    char mode = 0;
+    if (!(std::cin >> mode)) 
+    {
+        std::cerr << "Invalid input\n";
 
-		choise = getInputInt();
+        return 1;
+    }
 
-		menu(&people, count, choise);
-	} while (choise != 0);
+    if (mode == 'w' || mode == 'W') 
+    {
+        write_mode(fname);
+    }
 
-	for (int i = 0; i < count; ++i)
-	{
-		delete people[i];
-	}
+    else if (mode == 'r' || mode == 'R') 
+    {
+        read_mode(fname);
+    }
 
-	delete[] people;
+    else 
+    {
+        std::cerr << "Unknown mode: " << mode << "\n";
 
-	std::cout << "\n Exit.\n";
+        return 1;
+    }
 
-	return 0;
+    std::cout << "Done.\n";
+
+    return 0;
 }

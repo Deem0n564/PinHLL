@@ -21,6 +21,7 @@ set(SOURCES
 
 set(HEADERS
   ${CMAKE_SOURCE_DIR}/headers/functions.h
+  ${CMAKE_SOURCE_DIR}/headers/FileReader.h
 )
 
 # Автоматически добавить все .cpp в sources (альтернатива ручному перечислению)

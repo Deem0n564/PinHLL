@@ -1,8 +1,5 @@
 #include "functions.h"
 
-#include <iostream>
-#include <string>
-
 int main() 
 {
     const std::string fname = "data.bin";
@@ -13,6 +10,7 @@ int main()
         << " Enter w or r: ";
 
     char mode = 0;
+
     if (!(std::cin >> mode)) 
     {
         std::cerr << "Invalid input\n";

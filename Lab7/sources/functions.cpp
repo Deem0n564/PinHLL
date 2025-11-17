@@ -1,14 +1,9 @@
 #include "functions.h"
-#include "FileReader.h"
-
-#include <iostream>
-#include <fstream>
-#include <cstdint>
-#include <stdexcept>
 
 void write_mode(const std::string& fname)
 {
     std::ofstream out(fname, std::ios::binary);
+
     if (!out.is_open())
     {
         std::cerr << "Cannot create file: " << fname << "\n";
@@ -17,7 +12,7 @@ void write_mode(const std::string& fname)
     }
 
     std::cout << "Write mode. How many int32 values do you want to write? ";
-    std::size_t n;
+    int n;
 
     if (!(std::cin >> n))
     {
@@ -28,7 +23,7 @@ void write_mode(const std::string& fname)
 
     std::cout << "Enter values one by one (int32). Press Enter after each.\n";
 
-    for (std::size_t i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i)
     {
         int32_t val;
         std::cout << "element[" << i << "] = ";
@@ -89,14 +84,12 @@ void read_mode(const std::string& fname)
         {
             if (choice == 1)
             {
-                // index in int32 elements (each element is 4 bytes)
                 int32_t v = fr.readAtIndex<int32_t>(idx);
                 std::cout << "element[" << idx << "] (int32) = " << v << "\n";
             }
 
             else
             {
-                // index in uint8 elements (i.e. byte index)
                 uint8_t b = fr.readAtIndex<uint8_t>(idx);
                 std::cout << "byte[" << idx << "] (uint8) = " << static_cast<int>(b) << "\n";
             }

@@ -1,10 +1,6 @@
 #pragma once
 
-#include <fstream>
-#include <string>
-#include <stdexcept>
-#include <type_traits>
-#include <cstdint>
+#include "functions.h"
 
 class FileReader
 {
@@ -18,7 +14,6 @@ public:
         }
     }
 
-    // Read T at element index (offset = index * sizeof(T))
     template<typename T>
     T readAtIndex(std::size_t index)
     {
@@ -43,21 +38,7 @@ public:
         return value;
     }
 
-    std::uintmax_t sizeBytes()
-    {
-        auto cur = file.tellg();
-        file.clear();
-        file.seekg(0, std::ios::end);
-        auto sz = file.tellg();
-        file.seekg(cur);
-
-        if (sz == std::ifstream::pos_type(-1))
-        {
-            throw std::runtime_error("cannot determine size");
-        }
-
-        return static_cast<std::uintmax_t>(sz);
-    }
+    double sizeBytes();
 
 private:
     std::ifstream file;

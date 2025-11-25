@@ -5,21 +5,14 @@
 class FileReader
 {
 public:
-    explicit FileReader(const std::string& path)
-        : file(path, std::ios::binary)
-    {
-        if (!file.is_open())
-        {
-            throw std::runtime_error("Cannot open file: " + path);
-        }
-    }
+    explicit FileReader(const std::string& path);
 
     template<typename T>
-    T readAtIndex(std::size_t index)
+    T readAtIndex(int index)
     {
-        static_assert(std::is_trivially_copyable<T>::value, "T must be trivially copyable");
+        static_assert(std::is_trivially_copyable_v<T>, " T must be trivially copyable");
         std::streamoff offset = static_cast<std::streamoff>(index) * static_cast<std::streamoff>(sizeof(T));
-        file.clear(); // clear flags
+        file.clear();
         file.seekg(offset, std::ios::beg);
 
         if (!file.good())

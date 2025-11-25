@@ -3,7 +3,7 @@
 int main() 
 {
     const std::string fname = "data.bin";
-    std::cout << "\tProgram for writing/reading binary file data.bin\n"
+    std::cout << "\tProgram for writing/reading binary file data.bin\n\n"
         << " Choose mode:\n"
         << "   w - write\n"
         << "   r - read\n"

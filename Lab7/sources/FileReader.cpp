@@ -1,25 +1,44 @@
-#include "functions.h"
+#include "FileReader.h"
 
 FileReader::FileReader(const std::string& path)
     : file(path, std::ios::binary)
 {
     if (!file.is_open())
     {
-        throw std::runtime_error(" Cannot open file: " + path);
+        throw FileError("Cannot open file: " + path);
     }
 }
 
-double FileReader::sizeBytes()
+std::uintmax_t FileReader::sizeBytes()
 {
-    int cur = file.tellg();
+    // save current position
+    auto curPos = file.tellg();
+    if (curPos == std::ifstream::pos_type(-1))
+    {
+        // maybe stream not positioned yet; try to clear and continue
+        file.clear();
+        // still try to get end
+    }
+
     file.clear();
     file.seekg(0, std::ios::end);
-    double sz = file.tellg();
-    file.seekg(cur);
+    auto endPos = file.tellg();
 
-    if (sz == std::ifstream::pos_type(-1))
+    if (endPos == std::ifstream::pos_type(-1))
     {
-        throw std::runtime_error("cannot determine size");
+        throw FileError("cannot determine size");
+    }
+
+    std::uintmax_t sz = static_cast<std::uintmax_t>(endPos);
+
+    // restore position if possible
+    if (curPos != std::ifstream::pos_type(-1))
+    {
+        file.seekg(curPos);
+    }
+    else
+    {
+        file.seekg(0, std::ios::beg);
     }
 
     return sz;

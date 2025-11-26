@@ -28,6 +28,7 @@ int main()
                 std::cin >> value;
                 addIntToFileEnd(filename, value);
                 std::cout << " Integer " << value << " added to file." << std::endl;
+
                 break;
             }
 
@@ -38,6 +39,7 @@ int main()
                 if (fileSize == 0)
                 {
                     std::cout << " File is empty!" << std::endl;
+
                     break;
                 }
 
@@ -45,10 +47,10 @@ int main()
                 std::cout << " Enter index (0 to " << maxIndex << "): ";
                 size_t index;
                 std::cin >> index;
-
                 FileReader<int> arr(filename);
                 int value = arr[index];
                 std::cout << " Integer at index " << index << ": " << value << std::endl;
+
                 break;
             }
 
@@ -59,18 +61,18 @@ int main()
                 if (fileSize == 0)
                 {
                     std::cout << " File is empty!" << std::endl;
+
                     break;
                 }
 
                 std::cout << " Enter byte index (0 to " << fileSize - 1 << "): ";
                 size_t index;
                 std::cin >> index;
-
-                // Используем std::byte для байтового доступа
                 FileReader<std::byte> byteArr(filename);
                 std::byte byte = byteArr[index];
                 std::cout << " Byte at index " << index << ": "
                     << static_cast<int>(byte) << std::endl;
+
                 break;
             }
 
@@ -78,18 +80,21 @@ int main()
             {
                 FileReader<int>::clearFile(filename);
                 std::cout << " File cleared successfully!" << std::endl;
+
                 break;
             }
 
             case 0:
             {
                 std::cout << "\n Exit...\n\n" << std::endl;
+
                 return 0;
             }
 
             default:
             {
                 std::cout << " Invalid option!" << std::endl;
+
                 break;
             }
             }
@@ -103,6 +108,4 @@ int main()
             std::cerr << " Error: " << e.what() << std::endl;
         }
     }
-
-    return 0;
 }

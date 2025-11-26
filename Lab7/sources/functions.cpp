@@ -9,10 +9,10 @@ void addIntToFileEnd(const std::string& filename, int value)
         throw FileException("Cannot open file for writing: " + filename);
     }
 
-    // Используем char* вместо std::byte* для совместимости с потоками
     file.write(reinterpret_cast<const char*>(&value), sizeof(value));
 
-    if (!file) {
+    if (!file) 
+    {
         throw FileException("Write error in file: " + filename);
     }
 

@@ -31,7 +31,8 @@ public:
     static void clearFile(const std::string& filename)
     {
         std::ofstream file(filename, std::ios::binary | std::ios::trunc);
-        if (!file) {
+        if (!file) 
+        {
             throw FileException("Cannot clear file: " + filename);
         }
         file.close();
@@ -39,11 +40,9 @@ public:
 
     T operator[](size_t index)
     {
-        T value = T(); // Инициализируем значение по умолчанию
+        T value = T();
 
         file.seekg(index * sizeof(T));
-
-        // Используем char* вместо std::byte* для совместимости с потоками
         file.read(static_cast<char*>(static_cast<void*>(&value)), sizeof(T));
 
         if (!file)

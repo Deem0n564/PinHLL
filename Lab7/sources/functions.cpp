@@ -1,109 +1,35 @@
 #include "functions.h"
 
-void write_mode(const std::string& fname)
+void addIntToFileEnd(const std::string& filename, int value)
 {
-    std::ofstream out(fname, std::ios::binary);
+    std::ofstream file(filename, std::ios::binary | std::ios::app);
 
-    if (!out.is_open())
+    if (!file.is_open())
     {
-        std::cerr << " Cannot create file: " << fname << "\n";
-
-        return;
+        throw FileException("Cannot open file for writing: " + filename);
     }
 
-    std::cout << " Write mode.\n\n How many int values do you want to write? ";
-    int n;
+    // Используем char* вместо std::byte* для совместимости с потоками
+    file.write(reinterpret_cast<const char*>(&value), sizeof(value));
 
-    if (!(std::cin >> n))
-    {
-        std::cerr << " Invalid number of elements\n";
-
-        return;
+    if (!file) {
+        throw FileException("Write error in file: " + filename);
     }
 
-    std::cout << "\n Enter values one by one (int). Press Enter after each.\n";
-
-    for (int i = 0; i < n; ++i)
-    {
-        int val;
-        std::cout << "element[" << i << "] = ";
-
-        if (!(std::cin >> val))
-        {
-            std::cerr << " Invalid input\n";
-
-            return;
-        }
-
-        out.write(reinterpret_cast<const char*>(&val), static_cast<std::streamsize>(sizeof(val)));
-
-        if (!out)
-        {
-            std::cerr << " Error writing to file\n";
-
-            return;
-        }
-    }
-
-    std::cout << " Writing finished. File: " << fname << "\n";
+    file.close();
 }
 
-void read_mode(const std::string& fname)
+size_t getFileSize(const std::string& filename)
 {
-    try
+    std::ifstream file(filename, std::ios::binary | std::ios::ate);
+
+    if (!file.is_open())
     {
-        FileReader fr(fname);
-        std::cout << " Opened file: " << fname << "\n";
-        auto sz = fr.sizeBytes();
-        std::cout << " File size: " << sz << " bytes\n";
-
-        std::cout << " Choose read type:\n";
-        std::cout << "   1 - int (whole element)\n";
-        std::cout << "   2 - uint8 (byte indexing)\n";
-        std::cout << " Enter 1 or 2: ";
-        int choice = 0;
-
-        if (!(std::cin >> choice))
-        {
-            std::cerr << " Invalid input\n";
-
-            return;
-        }
-
-        std::cout << " Enter index (0-based): ";
-        int idx = 0;
-
-        if (!(std::cin >> idx))
-        {
-            std::cerr << " Invalid index input\n";
-
-            return;
-        }
-
-        try
-        {
-            if (choice == 1)
-            {
-                int v = fr.readAtIndex<int>(idx);
-                std::cout << "element[" << idx << "] (int) = " << v << "\n";
-            }
-
-            else
-            {
-                uint8_t b = fr.readAtIndex<uint8_t>(idx);
-                std::cout << "byte[" << idx << "] (uint8) = " << static_cast<int>(b) << "\n";
-            }
-        }
-
-        catch (const std::exception& e)
-        {
-            std::cout << " Read error: " << e.what() << "\n";
-        }
-
+        return 0;
     }
 
-    catch (const std::exception& e)
-    {
-        std::cerr << " Failed to open file: " << e.what() << "\n";
-    }
+    size_t size = file.tellg();
+    file.close();
+
+    return size;
 }

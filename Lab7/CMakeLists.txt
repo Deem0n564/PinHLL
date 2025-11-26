@@ -17,7 +17,6 @@ endif()
 set(SOURCES
   ${CMAKE_SOURCE_DIR}/sources/main.cpp
   ${CMAKE_SOURCE_DIR}/sources/functions.cpp
-  ${CMAKE_SOURCE_DIR}/sources/FileReader.cpp
 )
 
 set(HEADERS

@@ -1,12 +1,11 @@
 #pragma once
 
-#include <string>
-#include <iostream>
 #include <fstream>
-#include <stdexcept>
-#include <type_traits>
-#include <cstdint>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include "FileException.h"
 #include "FileReader.h"
 
-void write_mode(const std::string& fname);
-void read_mode(const std::string& fname);
+void addIntToFileEnd(const std::string& filename, int value);
+size_t getFileSize(const std::string& filename);

@@ -2,37 +2,55 @@
 
 #include "functions.h"
 
+template<typename T>
 class FileReader
 {
+private:
+    std::ifstream file;
+    std::string filename;
+
 public:
-    explicit FileReader(const std::string& path);
-
-    template<typename T>
-    T readAtIndex(int index)
+    explicit FileReader(const std::string& fname) : filename(fname)
     {
-        static_assert(std::is_trivially_copyable_v<T>, " T must be trivially copyable");
-        std::streamoff offset = static_cast<std::streamoff>(index) * static_cast<std::streamoff>(sizeof(T));
-        file.clear();
-        file.seekg(offset, std::ios::beg);
+        file.open(filename, std::ios::binary);
 
-        if (!file.good())
+        if (!file.is_open())
         {
-            throw std::runtime_error("seek failed (maybe index out of range)");
+            throw FileException("Cannot open file: " + filename);
         }
+    }
 
-        T value{};
-        file.read(reinterpret_cast<char*>(&value), static_cast<std::streamsize>(sizeof(T)));
-
-        if (file.gcount() != static_cast<std::streamsize>(sizeof(T)))
+    ~FileReader()
+    {
+        if (file.is_open())
         {
-            throw std::runtime_error("read failed or EOF reached");
+            file.close();
+        }
+    }
+
+    static void clearFile(const std::string& filename)
+    {
+        std::ofstream file(filename, std::ios::binary | std::ios::trunc);
+        if (!file) {
+            throw FileException("Cannot clear file: " + filename);
+        }
+        file.close();
+    }
+
+    T operator[](size_t index)
+    {
+        T value = T(); // Инициализируем значение по умолчанию
+
+        file.seekg(index * sizeof(T));
+
+        // Используем char* вместо std::byte* для совместимости с потоками
+        file.read(reinterpret_cast<char*>(&value), sizeof(T));
+
+        if (!file)
+        {
+            throw FileException("Read error at index: " + std::to_string(index));
         }
 
         return value;
     }
-
-    double sizeBytes();
-
-private:
-    std::ifstream file;
 };

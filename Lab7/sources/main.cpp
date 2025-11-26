@@ -34,7 +34,7 @@ int main()
 
             case 2:
             {
-                size_t fileSize = getFileSize(filename);
+                int fileSize = getFileSize(filename);
 
                 if (fileSize == 0)
                 {
@@ -43,9 +43,9 @@ int main()
                     break;
                 }
 
-                size_t maxIndex = fileSize / sizeof(int) - 1;
+                int maxIndex = fileSize / sizeof(int) - 1;
                 std::cout << " Enter index (0 to " << maxIndex << "): ";
-                size_t index;
+                int index;
                 std::cin >> index;
                 FileReader<int> arr(filename);
                 int value = arr[index];
@@ -56,7 +56,7 @@ int main()
 
             case 3:
             {
-                size_t fileSize = getFileSize(filename);
+                int fileSize = getFileSize(filename);
 
                 if (fileSize == 0)
                 {
@@ -66,7 +66,7 @@ int main()
                 }
 
                 std::cout << " Enter byte index (0 to " << fileSize - 1 << "): ";
-                size_t index;
+                int index;
                 std::cin >> index;
                 FileReader<std::byte> byteArr(filename);
                 std::byte byte = byteArr[index];

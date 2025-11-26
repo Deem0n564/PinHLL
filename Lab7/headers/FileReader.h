@@ -38,7 +38,7 @@ public:
         file.close();
     }
 
-    T operator[](size_t index)
+    T operator[](int index)
     {
         T value = T();
 

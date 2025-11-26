@@ -19,7 +19,7 @@ void addIntToFileEnd(const std::string& filename, int value)
     file.close();
 }
 
-size_t getFileSize(const std::string& filename)
+int getFileSize(const std::string& filename)
 {
     std::ifstream file(filename, std::ios::binary | std::ios::ate);
 
@@ -28,7 +28,7 @@ size_t getFileSize(const std::string& filename)
         return 0;
     }
 
-    size_t size = file.tellg();
+    int size = file.tellg();
     file.close();
 
     return size;

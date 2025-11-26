@@ -8,4 +8,4 @@
 #include "FileReader.h"
 
 void addIntToFileEnd(const std::string& filename, int value);
-size_t getFileSize(const std::string& filename);
+int getFileSize(const std::string& filename);

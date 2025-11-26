@@ -44,7 +44,7 @@ public:
         file.seekg(index * sizeof(T));
 
         // Используем char* вместо std::byte* для совместимости с потоками
-        file.read(reinterpret_cast<char*>(&value), sizeof(T));
+        file.read(static_cast<char*>(static_cast<void*>(&value)), sizeof(T));
 
         if (!file)
         {

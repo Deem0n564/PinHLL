@@ -28,7 +28,7 @@ int getFileSize(const std::string& filename)
         return 0;
     }
 
-    int size = file.tellg();
+    auto size = file.tellg();
     file.close();
 
     return size;

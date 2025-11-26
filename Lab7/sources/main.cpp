@@ -43,7 +43,7 @@ int main()
                     break;
                 }
 
-                int maxIndex = fileSize / sizeof(int) - 1;
+                size_t maxIndex = fileSize / sizeof(int) - 1;
                 std::cout << " Enter index (0 to " << maxIndex << "): ";
                 int index;
                 std::cin >> index;

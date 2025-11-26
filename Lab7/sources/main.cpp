@@ -34,7 +34,7 @@ int main()
 
             case 2:
             {
-                int fileSize = getFileSize(filename);
+                size_t fileSize = getFileSize(filename);
 
                 if (fileSize == 0)
                 {
@@ -56,7 +56,7 @@ int main()
 
             case 3:
             {
-                int fileSize = getFileSize(filename);
+                size_t fileSize = getFileSize(filename);
 
                 if (fileSize == 0)
                 {

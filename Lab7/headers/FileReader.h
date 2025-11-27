@@ -31,6 +31,7 @@ public:
     static void clearFile(const std::string& filename)
     {
         std::ofstream file(filename, std::ios::binary | std::ios::trunc);
+
         if (!file) 
         {
             throw FileException("Cannot clear file: " + filename);

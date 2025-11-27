@@ -2,6 +2,7 @@
 
 int main()
 {
+    int choice;
     std::string filename = "data.bin";
 
     while (true)
@@ -13,8 +14,6 @@ int main()
             << "\n 4. Clear file"
             << "\n 0. Exit"
             << "\n Your choice: ";
-
-        int choice;
         std::cin >> choice;
 
         try
@@ -40,21 +39,21 @@ int main()
             {
                 FileReader<int>::clearFile(filename);
 
-                std::cout << " File cleared successfully!" << std::endl;
+                std::cout << " File cleared successfully!\n";
 
                 break;
             }
 
             case 0:
             {
-                std::cout << "\n Exit...\n\n" << std::endl;
+                std::cout << "\n Exit...\n\n";
 
                 return 0;
             }
 
             default:
             {
-                std::cout << " Invalid option!" << std::endl;
+                std::cout << " Invalid option!\n";
 
                 break;
             }
@@ -62,11 +61,11 @@ int main()
         }
         catch (const FileException& e)
         {
-            std::cerr << " File Error: " << e.what() << std::endl;
+            std::cerr << " File Error: " << e.what() << "\n";
         }
         catch (const std::exception& e)
         {
-            std::cerr << " Error: " << e.what() << std::endl;
+            std::cerr << " Error: " << e.what() << "\n";
         }
     }
 }

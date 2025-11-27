@@ -8,6 +8,7 @@
 #include "FileReader.h"
 
 void addIntToFileEnd(const std::string& filename, int value);
+int getInputInt();
 size_t getFileSize(const std::string& filename);
 
 void inputIntegerToFile(const std::string& filename);

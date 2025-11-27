@@ -62,7 +62,7 @@ void inputIntegerToFile(const std::string& filename)
     int value;
 
     std::cout << " Enter integer to file: ";
-    std::cin >> value;
+    value = getInputInt();
     addIntToFileEnd(filename, value);
     std::cout << " Integer " << value << " added to file.\n";
 }
@@ -81,7 +81,7 @@ void readIntegerByIndex(const std::string& filename)
 
     size_t maxIndex = fileSize / sizeof(int) - 1;
     std::cout << " Enter index (0 to " << maxIndex << "): ";
-    std::cin >> index;
+    index = getInputInt();
     FileReader<int> arr(filename);
     int value = arr[index];
     std::cout << " Integer at index " << index << ": " << value << "\n";
@@ -100,7 +100,7 @@ void readByteByIndex(const std::string& filename)
     }
 
     std::cout << " Enter byte index (0 to " << fileSize - 1 << "): ";
-    std::cin >> index;
+    index = getInputInt();
     FileReader<std::byte> byteArr(filename);
     std::byte byte = byteArr[index];
     std::cout << " Byte at index " << index << ": "

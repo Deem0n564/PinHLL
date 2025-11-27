@@ -14,7 +14,7 @@ int main()
             << "\n 4. Clear file"
             << "\n 0. Exit"
             << "\n Your choice: ";
-        std::cin >> choice;
+        choice = getInputInt();
 
         try
         {

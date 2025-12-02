@@ -107,7 +107,16 @@ void inputString(char* str, int size)
     std::string temp;
     std::getline(std::cin, temp);
 
-    strncpy_s(str, size, temp.c_str(), _TRUNCATE);
+    if (!temp.empty()) 
+    {
+        size_t copySize = std::min(temp.size(), static_cast<size_t>(size - 1));
+        std::copy_n(temp.begin(), copySize, str);
+        str[copySize] = '\0';
+    }
+    else 
+    {
+        str[0] = '\0';
+    }
 }
 
 Product inputProduct()

@@ -8,10 +8,9 @@ int main()
     while (true)
     {
         std::cout << "\tMENU"
-            << "\n 1. Input integer (to end of file)"
-            << "\n 2. Read integer by index"
-            << "\n 3. Read byte by index"
-            << "\n 4. Clear file"
+            << "\n 1. Input object to file"
+            << "\n 2. Read object by index"
+            << "\n 3. Clear file"
             << "\n 0. Exit"
             << "\n Your choice: ";
         choice = getInputInt();
@@ -21,24 +20,22 @@ int main()
             switch (choice)
             {
             case 1:
-                inputIntegerToFile(filename);
+            {
+                inputObjectToFile(filename);
 
                 break;
+            }
 
             case 2:
-                readIntegerByIndex(filename);
+            {
+                readObjectByIndex(filename);
 
                 break;
+            }
 
             case 3:
-                readByteByIndex(filename);
-
-                break;
-
-            case 4:
             {
                 FileReader<int>::clearFile(filename);
-
                 std::cout << " File cleared successfully!\n";
 
                 break;

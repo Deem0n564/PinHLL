@@ -16,7 +16,7 @@ public:
 
         if (!file.is_open())
         {
-            throw FileException("Cannot open file: " + filename);
+            throw FileException(" Cannot open file: " + filename);
         }
     }
 
@@ -32,25 +32,35 @@ public:
     {
         std::ofstream file(filename, std::ios::binary | std::ios::trunc);
 
-        if (!file) 
+        if (!file)
         {
-            throw FileException("Cannot clear file: " + filename);
+            throw FileException(" Cannot clear file: " + filename);
         }
+
         file.close();
     }
 
     T operator[](int index)
     {
-        T value = T();
+        T value;
 
         file.seekg(index * sizeof(T));
-        file.read(static_cast<char*>(static_cast<void*>(&value)), sizeof(T));
+        file.read(reinterpret_cast<char*>(&value), sizeof(T));
 
         if (!file)
         {
-            throw FileException("Read error at index: " + std::to_string(index));
+            throw FileException(" Read error at index: " + std::to_string(index));
         }
 
         return value;
+    }
+
+    size_t getObjectCount()
+    {
+        file.seekg(0, std::ios::end);
+        size_t size = file.tellg();
+        file.seekg(0, std::ios::beg);
+
+        return size / sizeof(T);
     }
 };

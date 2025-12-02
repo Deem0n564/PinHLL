@@ -1,6 +1,7 @@
 #include "functions.h"
 
-void addIntToFileEnd(const std::string& filename, int value)
+template<typename T>
+void addObjectToFileEnd(const std::string& filename, const T& value)
 {
     std::ofstream file(filename, std::ios::binary | std::ios::app);
 
@@ -9,9 +10,9 @@ void addIntToFileEnd(const std::string& filename, int value)
         throw FileException("Cannot open file for writing: " + filename);
     }
 
-    file.write(reinterpret_cast<const char*>(&value), sizeof(value));
+    file.write(reinterpret_cast<const char*>(&value), sizeof(T));
 
-    if (!file) 
+    if (!file)
     {
         throw FileException("Write error in file: " + filename);
     }
@@ -19,16 +20,54 @@ void addIntToFileEnd(const std::string& filename, int value)
     file.close();
 }
 
+template <>
+void addObjectToFileEnd(const std::string& filename, const char(&value)[50])
+{
+    std::ofstream file(filename, std::ios::binary | std::ios::app);
+
+    if (!file.is_open())
+    {
+        throw FileException("Cannot open file for writing: " + filename);
+    }
+
+    file.write(value, 50);
+
+    if (!file)
+    {
+        throw FileException("Write error in file: " + filename);
+    }
+    file.close();
+}
+
+template<typename T>
+size_t getFileObjectCount(const std::string& filename)
+{
+    std::ifstream file(filename, std::ios::binary | std::ios::ate);
+
+    if (!file.is_open())
+    {
+        return 0;
+    }
+
+    size_t size = file.tellg();
+    file.close();
+
+    return size / sizeof(T);
+}
+
+template void addObjectToFileEnd<int>(const std::string&, const int&);
+template void addObjectToFileEnd<Product>(const std::string&, const Product&);
+template size_t getFileObjectCount<int>(const std::string&);
+template size_t getFileObjectCount<Product>(const std::string&);
+
 int getInputInt()
 {
     int input = 0;
-
     while (true)
     {
         if (std::cin >> input)
         {
             std::cin.ignore(100, '\n');
-
             return input;
         }
 
@@ -36,8 +75,7 @@ int getInputInt()
         {
             std::cin.clear();
             std::cin.ignore(100, '\n');
-
-            std::cout << " Incorrect! Please enter a valid integer: ";
+            std::cout << "Incorrect! Please enter a valid integer: ";
         }
     }
 }
@@ -57,52 +95,207 @@ size_t getFileSize(const std::string& filename)
     return size;
 }
 
-void inputIntegerToFile(const std::string& filename) 
+std::ostream& operator<<(std::ostream& os, const Product& p)
 {
-    int value;
+    os << p.name << " " << p.price;
 
-    std::cout << " Enter integer to file: ";
-    value = getInputInt();
-    addIntToFileEnd(filename, value);
-    std::cout << " Integer " << value << " added to file.\n";
+    return os;
 }
 
-void readIntegerByIndex(const std::string& filename) 
+void inputString(char* str, int size)
 {
-    int index;
-    size_t fileSize = getFileSize(filename);
+    std::string temp;
+    std::getline(std::cin, temp);
 
-    if (fileSize == 0) 
-    {
-        std::cout << " File is empty!\n";
-
-        return;
-    }
-
-    size_t maxIndex = fileSize / sizeof(int) - 1;
-    std::cout << " Enter index (0 to " << maxIndex << "): ";
-    index = getInputInt();
-    FileReader<int> arr(filename);
-    int value = arr[index];
-    std::cout << " Integer at index " << index << ": " << value << "\n";
+    strncpy_s(str, size, temp.c_str(), _TRUNCATE);
 }
 
-void readByteByIndex(const std::string& filename) 
+Product inputProduct()
 {
-    int index;
-    size_t fileSize = getFileSize(filename);
+    Product p;
+    std::cout << "Enter product details:\n";
 
-    if (fileSize == 0)
+    std::cout << "Name: ";
+    inputString(p.name, 50);
+
+    std::cout << "Price: ";
+    p.price = getInputInt();
+
+    return p;
+}
+
+void printProduct(const Product& p)
+{
+    std::cout << "Product{Name: \"" << p.name << "\", Price: " << p.price << "}";
+}
+
+void inputObjectToFile(const std::string& filename)
+{
+    std::cout << "Choose data type:\n";
+    std::cout << "1. Integer\n";
+    std::cout << "2. Product\n";
+    std::cout << "3. String\n";
+    std::cout << "Your choice: ";
+
+    int choice = getInputInt();
+
+    try
     {
-        std::cout << " File is empty!\n";
+        switch (choice)
+        {
+        case 1:
+        {
+            std::cout << "Enter integer value: ";
+            int value = getInputInt();
+            addObjectToFileEnd(filename, value);
+            std::cout << "Integer " << value << " added to file.\n";
 
-        return;
+            break;
+        }
+        case 2:
+        {
+            Product value = inputProduct();
+            addObjectToFileEnd(filename, value);
+            std::cout << "Product added to file: ";
+            printProduct(value);
+            std::cout << "\n";
+
+            break;
+        }
+
+        case 3:
+        {
+            char strValue[50] = { 0 };
+            std::cout << "Enter string: ";
+            inputString(strValue, 50);
+            addObjectToFileEnd(filename, strValue);
+            std::cout << "String \"" << strValue << "\" added to file.\n";
+
+            break;
+        }
+
+        default:
+            std::cout << "Invalid choice!\n";
+
+            break;
+        }
     }
+    catch (const FileException& e)
+    {
+        std::cerr << "File Error: " << e.what() << "\n";
+    }
+}
 
-    std::cout << " Enter byte index (0 to " << fileSize - 1 << "): ";
-    index = getInputInt();
-    FileReader<std::byte> byteArr(filename);
-    std::byte byte = byteArr[index];
-    std::cout << " Byte at index " << index << ": "
-        << static_cast<int>(byte) << "\n";
+void readObjectByIndex(const std::string& filename)
+{
+    std::cout << "Choose data type to read:\n";
+    std::cout << "1. Integer\n";
+    std::cout << "2. Product\n";
+    std::cout << "3. String\n";
+    std::cout << "Your choice: ";
+
+    int typeChoice = getInputInt();
+
+    try
+    {
+        switch (typeChoice)
+        {
+        case 1:
+        {
+            FileReader<int> reader(filename);
+            size_t objectCount = reader.getObjectCount();
+
+            if (objectCount == 0) 
+            {
+                std::cout << "File is empty!\n";
+
+                return;
+            }
+
+            std::cout << "Enter index (0 to " << objectCount - 1 << "): ";
+            int index = getInputInt();
+
+            if (index < 0 || index >= objectCount) 
+            {
+                std::cout << "Index out of range!\n";
+
+                return;
+            }
+
+            int value = reader[index];
+            std::cout << "Integer at index " << index << ": " << value << "\n";
+
+            break;
+        }
+
+        case 2:
+        {
+            FileReader<Product> reader(filename);
+            size_t objectCount = reader.getObjectCount();
+
+            if (objectCount == 0) 
+            {
+                std::cout << "File is empty!\n";
+
+                return;
+            }
+
+            std::cout << "Enter index (0 to " << objectCount - 1 << "): ";
+            int index = getInputInt();
+
+            if (index < 0 || index >= objectCount) 
+            {
+                std::cout << "Index out of range!\n";
+
+                return;
+            }
+
+            Product value = reader[index];
+            std::cout << "Product at index " << index << ": ";
+            printProduct(value);
+            std::cout << "\n";
+
+            break;
+        }
+
+        case 3:
+        {
+            struct TempString { char data[50]; };
+
+            FileReader<TempString> reader(filename);
+            size_t objectCount = reader.getObjectCount();
+
+            if (objectCount == 0) 
+            {
+                std::cout << " File is empty!\n";
+
+                return;
+            }
+
+            std::cout << " Enter index (0 to " << objectCount - 1 << "): ";
+            int index = getInputInt();
+
+            if (index < 0 || index >= objectCount) 
+            {
+                std::cout << " Index out of range!\n";
+
+                return;
+            }
+
+            TempString temp = reader[index];
+            std::cout << " String at index " << index << ": \"" << temp.data << "\"\n";
+
+            break;
+        }
+
+        default:
+            std::cout << " Invalid choice!\n";
+
+            break;
+        }
+    }
+    catch (const FileException& e)
+    {
+        std::cerr << "File Error: " << e.what() << "\n";
+    }
 }

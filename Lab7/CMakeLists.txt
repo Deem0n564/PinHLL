@@ -21,6 +21,8 @@ set(SOURCES
 
 set(HEADERS
   ${CMAKE_SOURCE_DIR}/headers/functions.h
+  ${CMAKE_SOURCE_DIR}/headers/FileException.h
+  ${CMAKE_SOURCE_DIR}/headers/Product.h
   ${CMAKE_SOURCE_DIR}/headers/FileReader.h
 )
 

@@ -6,9 +6,9 @@ class Product
 {
 public:
     char name[50];
-    int price;
+    int price = 0;
 
-    Product() : price(0) 
+    Product()
     {
         name[0] = '\0';
     }
@@ -16,4 +16,4 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Product& p);
 };
 
-std::ostream& operator<<(std::ostream& os, const Product& p);
+//std::ostream& operator<<(std::ostream& os, const Product& p);

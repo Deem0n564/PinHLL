@@ -109,8 +109,14 @@ void inputString(char* str, int size)
 
     if (!temp.empty()) 
     {
-        size_t copySize = std::min(temp.size(), static_cast<size_t>(size - 1));
-        std::copy_n(temp.begin(), copySize, str);
+        size_t copySize = temp.size();
+
+        if (copySize > static_cast<size_t>(size - 1)) 
+        {
+            copySize = size - 1;
+        }
+
+        std::copy(temp.begin(), temp.begin() + copySize, str);
         str[copySize] = '\0';
     }
     else 

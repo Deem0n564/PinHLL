@@ -5,6 +5,7 @@
 #include <string>
 #include <cstddef>
 #include <cstring>
+#include <algorythm>
 #include <stdexcept>
 #include "FileException.h"
 #include "FileReader.h"

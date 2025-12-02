@@ -109,9 +109,9 @@ void inputString(char* str, int size)
 
     if (!temp.empty()) 
     {
-        int copySize = temp.size();
+        size_t copySize = temp.size();
 
-        if (copySize > (size - 1)) 
+        if (copySize > static_cast<size_t>(size - 1)) 
         {
             copySize = size - 1;
         }

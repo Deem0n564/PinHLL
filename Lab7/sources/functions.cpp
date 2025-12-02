@@ -63,14 +63,15 @@ template size_t getFileObjectCount<Product>(const std::string&);
 int getInputInt()
 {
     int input = 0;
+
     while (true)
     {
         if (std::cin >> input)
         {
             std::cin.ignore(100, '\n');
+
             return input;
         }
-
         else
         {
             std::cin.clear();
@@ -160,6 +161,7 @@ void inputObjectToFile(const std::string& filename)
 
             break;
         }
+
         case 2:
         {
             Product value = inputProduct();

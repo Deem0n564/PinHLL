@@ -95,13 +95,6 @@ size_t getFileSize(const std::string& filename)
     return size;
 }
 
-std::ostream& operator<<(std::ostream& os, const Product& p)
-{
-    os << p.name << " " << p.price;
-
-    return os;
-}
-
 void inputString(char* str, int size)
 {
     std::string temp;

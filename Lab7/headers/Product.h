@@ -13,7 +13,12 @@ public:
         name[0] = '\0';
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Product& p);
-};
+    friend std::ostream& operator<<(std::ostream& os, const Product& p)
+    {
+        {
+            os << p.name << " " << p.price;
 
-//std::ostream& operator<<(std::ostream& os, const Product& p);
+            return os;
+        }
+    }
+};

@@ -5,5 +5,5 @@
 5\. Реализуйте класс как в задаче 4, но пусть оператор \[] индексирует объекты произвольного типа, а не только символы.
 
 Ссылка на SonarQube Cloud:
-https://sonarcloud.io/project/overview?id=deem0n564\_Lab7
+https://sonarcloud.io/project/overview?id=deem0n564/_Lab7
 

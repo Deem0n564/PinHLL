@@ -135,7 +135,7 @@ void sort(Deque<int>& deque) {
     deque.print();
 }
 
-void reversePrint(Deque<int>& deque) {
+void reversePrint(const Deque<int>& deque) {
     if (deque.empty()) {
         std::cout << "Deque is empty.\n";
     }

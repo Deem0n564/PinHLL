@@ -16,7 +16,7 @@ void removeRight(Deque<int>& deque);
 void clear(Deque<int>& deque);
 void search(Deque<int>& deque);
 void sort(Deque<int>& deque);
-void reversePrint(Deque<int>& deque);
+void reversePrint(const Deque<int>& deque);
 
 template <typename T>
 void printDequeInfo(Deque<T>& deque) {

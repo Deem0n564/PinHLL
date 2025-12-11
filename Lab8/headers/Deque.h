@@ -6,13 +6,11 @@ template <typename T>
 class Deque 
 {
 private:
-    std::shared_ptr<Node<T>> front;
-    std::shared_ptr<Node<T>> back;
-    size_t size_;
+    std::shared_ptr<Node<T>> front = nullptr;
+    std::shared_ptr<Node<T>> back = nullptr;
+    size_t size_ = 0;
 
 public:
-    Deque() : front(nullptr), back(nullptr), size_(0) {}
-
     Deque(const Deque& other) : front(nullptr), back(nullptr), size_(0) 
     {
         auto current = other.front;

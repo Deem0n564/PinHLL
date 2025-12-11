@@ -7,4 +7,3 @@
 
 Ссылка на SonarQube Cloud:
 https://sonarcloud.io/project/overview?id=deem0n564_Lab8
-

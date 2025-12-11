@@ -21,6 +21,10 @@ set(SOURCES
 
 set(HEADERS
   ${CMAKE_SOURCE_DIR}/headers/functions.h
+  ${CMAKE_SOURCE_DIR}/headers/Node.h
+  ${CMAKE_SOURCE_DIR}/headers/Deque.h
+  ${CMAKE_SOURCE_DIR}/headers/DequeIterator.h
+  ${CMAKE_SOURCE_DIR}/headers/DequeAlgorythm.h
 )
 
 # Автоматически добавить все .cpp в sources (альтернатива ручному перечислению)

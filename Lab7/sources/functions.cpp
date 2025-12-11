@@ -140,11 +140,11 @@ void printProduct(const Product& p)
 
 void inputObjectToFile(const std::string& filename)
 {
-    std::cout << "Choose data type:\n";
-    std::cout << "1. Integer\n";
-    std::cout << "2. Product\n";
-    std::cout << "3. String\n";
-    std::cout << "Your choice: ";
+    std::cout << "Choose data type:\n"
+        << "1. Integer\n"
+        << "2. Product\n"
+        << "3. String\n"
+        << "Your choice: ";
 
     int choice = getInputInt();
 
@@ -198,11 +198,11 @@ void inputObjectToFile(const std::string& filename)
 
 void readObjectByIndex(const std::string& filename)
 {
-    std::cout << "Choose data type to read:\n";
-    std::cout << "1. Integer\n";
-    std::cout << "2. Product\n";
-    std::cout << "3. String\n";
-    std::cout << "Your choice: ";
+    std::cout << "Choose data type to read:\n"
+        << "1. Integer\n"
+        << "2. Product\n"
+        << "3. String\n"
+        << "Your choice: ";
 
     int typeChoice = getInputInt();
 

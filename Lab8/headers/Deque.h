@@ -11,7 +11,7 @@ private:
     size_t size_ = 0;
 
 public:
-    Deque(const Deque& other) : front(nullptr), back(nullptr), size_(0) 
+    Deque(const Deque& other)
     {
         auto current = other.front;
         while (current) 

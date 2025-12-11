@@ -7,7 +7,8 @@
 #include "DequeIterator.h"
 
 template <typename T>
-class Deque {
+class Deque
+{
 private:
     std::shared_ptr<Node<T>> front = nullptr;
     std::shared_ptr<Node<T>> back = nullptr;
@@ -16,165 +17,221 @@ private:
 public:
     Deque() = default;
 
-    Deque(const Deque& other) {
+    Deque(const Deque& other)
+    {
         auto current = other.front;
-        while (current) {
-            push_back(current->data);
+
+        while (current)
+        {
+            pushBack(current->data);
             current = current->next;
         }
     }
 
-    Deque& operator=(const Deque& other) {
-        if (this != &other) {
+    Deque& operator=(const Deque& other)
+    {
+        if (this != &other)
+        {
             clear();
             auto current = other.front;
-            while (current) {
-                push_back(current->data);
+
+            while (current)
+            {
+                pushBack(current->data);
                 current = current->next;
             }
         }
+
         return *this;
     }
 
     Deque(Deque&& other)
-        : front(std::move(other.front)), back(std::move(other.back)), size_(other.size_) {
+        : front(std::move(other.front)), back(std::move(other.back)), size_(other.size_)
+    {
         other.size_ = 0;
     }
 
-    Deque& operator=(Deque&& other) {
-        if (this != &other) {
+    Deque& operator=(Deque&& other)
+    {
+        if (this != &other)
+        {
             clear();
             front = std::move(other.front);
             back = std::move(other.back);
             size_ = other.size_;
             other.size_ = 0;
         }
+
         return *this;
     }
 
-    ~Deque() {
+    ~Deque()
+    {
         clear();
     }
 
-    bool empty() const {
+    bool empty() const
+    {
         return size_ == 0;
     }
 
-    size_t size() const {
+    size_t size() const
+    {
         return size_;
     }
 
-    T& get_front() const {
-        if (empty()) {
-            throw std::out_of_range("Deque is empty");
+    T& getFront() const
+    {
+        if (empty())
+        {
+            throw std::out_of_range(" Deque is empty");
         }
+
         return front->data;
     }
 
-    T& get_back() const {
-        if (empty()) {
-            throw std::out_of_range("Deque is empty");
+    T& getBack() const
+    {
+        if (empty())
+        {
+            throw std::out_of_range(" Deque is empty");
         }
+
         return back->data;
     }
 
-    void push_front(const T& value) {
+    void pushFront(const T& value)
+    {
         auto newNode = std::make_shared<Node<T>>(value);
 
-        if (empty()) {
+        if (empty())
+        {
             front = back = newNode;
         }
-        else {
+        else
+        {
             newNode->next = front;
             front->prev = newNode;
             front = newNode;
         }
+
         size_++;
     }
 
-    void push_back(const T& value) {
+    void pushBack(const T& value)
+    {
         auto newNode = std::make_shared<Node<T>>(value);
 
-        if (empty()) {
+        if (empty())
+        {
             front = back = newNode;
         }
-        else {
+        else
+        {
             newNode->prev = back;
             back->next = newNode;
             back = newNode;
         }
+
         size_++;
     }
 
-    void pop_front() {
-        if (empty()) {
-            throw std::out_of_range("Deque is empty");
+    void popFront()
+    {
+        if (empty())
+        {
+            throw std::out_of_range(" Deque is empty");
         }
 
-        if (front == back) {
+        if (front == back)
+        {
             front = back = nullptr;
         }
-        else {
+        else
+        {
             front = front->next;
-            if (front) {
+
+            if (front)
+            {
                 front->prev = nullptr;
             }
         }
+
         size_--;
     }
 
-    void pop_back() {
-        if (empty()) {
-            throw std::out_of_range("Deque is empty");
+    void popBack()
+    {
+        if (empty())
+        {
+            throw std::out_of_range(" Deque is empty");
         }
 
-        if (front == back) {
+        if (front == back)
+        {
             front = back = nullptr;
         }
-        else {
+        else
+        {
             back = back->prev;
-            if (back) {
+
+            if (back)
+            {
                 back->next = nullptr;
             }
         }
+
         size_--;
     }
 
-    void clear() {
-        while (!empty()) {
-            pop_front();
+    void clear()
+    {
+        while (!empty())
+        {
+            popFront();
         }
     }
 
-    DequeIterator<T> begin() {
+    DequeIterator<T> begin()
+    {
         return DequeIterator<T>(front);
     }
 
-    DequeIterator<T> end() {
+    DequeIterator<T> end()
+    {
         return DequeIterator<T>(nullptr);
     }
 
-    DequeIterator<T> rbegin() {
+    DequeIterator<T> rbegin()
+    {
         return DequeIterator<T>(back);
     }
 
-    void print() const {
+    void print() const
+    {
         auto current = front;
-        std::cout << "Deque (size=" << size_ << "): ";
-        while (current) {
+        std::cout << " Deque (size = " << size_ << "): ";
+
+        while (current)
+        {
             std::cout << current->data << " ";
             current = current->next;
         }
+
         std::cout << std::endl;
     }
 
-    void print_reverse() const {
+    void printReverse() const
+    {
         auto current = back;
-        std::cout << "Deque reverse: ";
-        while (current) {
+        std::cout << " Deque reverse: ";
+
+        while (current)
+        {
             std::cout << current->data << " ";
             current = current->prev;
         }
-        std::cout << std::endl;
+
+        std::cout << "\n";
     }
 };

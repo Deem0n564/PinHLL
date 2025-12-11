@@ -3,7 +3,7 @@
 #include <memory>
 
 template <typename T>
-class Node 
+class Node
 {
 public:
     T data;

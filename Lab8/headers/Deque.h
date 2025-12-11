@@ -36,12 +36,12 @@ public:
         return *this;
     }
 
-    Deque(Deque&& other) noexcept
+    Deque(Deque&& other)
         : front(std::move(other.front)), back(std::move(other.back)), size_(other.size_) {
         other.size_ = 0;
     }
 
-    Deque& operator=(Deque&& other) noexcept {
+    Deque& operator=(Deque&& other) {
         if (this != &other) {
             clear();
             front = std::move(other.front);

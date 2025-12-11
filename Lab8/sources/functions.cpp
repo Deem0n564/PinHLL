@@ -1,23 +1,36 @@
 #include "functions.h"
+#include <iostream>
+#include "Deque.h"
 
-int getInputInt()
-{
+int getInputInt() {
     int input = 0;
 
-    while (true)
-    {
-        if (std::cin >> input)
-        {
+    while (true) {
+        if (std::cin >> input) {
             std::cin.ignore(100, '\n');
-
             return input;
         }
-        else
-        {
+        else {
             std::cin.clear();
             std::cin.ignore(100, '\n');
             std::cout << "Incorrect! Please enter a valid integer: ";
         }
+    }
+}
+
+template <typename T>
+void printDequeInfo(const Deque<T>& deque) {
+    std::cout << "\nCurrent deque state:\n";
+    std::cout << "Size: " << deque.size() << std::endl;
+
+    if (!deque.empty()) {
+        std::cout << "First element: " << deque.get_front() << std::endl;
+        std::cout << "Last element: " << deque.get_back() << std::endl;
+        std::cout << "Contents: ";
+        deque.print();
+    }
+    else {
+        std::cout << "Deque is empty.\n";
     }
 }
 

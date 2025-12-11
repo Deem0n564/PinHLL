@@ -1,14 +1,14 @@
 #pragma once
 
-#include "functions.h"
+#include <memory>
 
 template <typename T>
-class Node
+class Node 
 {
 public:
     T data;
-    std::shared_ptr<Node<T>> next;
-    std::shared_ptr<Node<T>> prev;
+    std::shared_ptr<Node<T>> next = nullptr;
+    std::shared_ptr<Node<T>> prev = nullptr;
 
-    Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+    explicit Node(const T& value) : data(value) {}
 };
